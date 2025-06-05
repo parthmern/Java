@@ -1,5 +1,6 @@
 package com.example.todoApiSpring;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,13 +13,16 @@ import java.util.List;
 public class TodoController {
     private static List<Todo> todoList;
 
+    @Autowired
     private TodoService todoService;
 
+    // TodoController(TodoService todoService)
     TodoController(){
+        this.todoService = todoService;
         todoList = new ArrayList<>();
         todoList.add(new Todo(1,false, "Todo1", 1));
         todoList.add(new Todo(2,false, "Todo2", 2));
-        this.todoService = new TodoService();
+        //this.todoService = new TodoService();
     }
 
     @GetMapping("/todos")
