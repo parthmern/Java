@@ -1,6 +1,7 @@
 package com.example.todoApiSpring;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,23 +12,31 @@ import java.util.List;
 @RestController
 //@RequestMapping("/api/v1")
 public class TodoController {
+    private TodoService todoService; // anotherTodoService
+    private TodoService todoService2; // fakeTodoService
     private static List<Todo> todoList;
 
-    @Autowired
-    private TodoService todoService;
+    //@Autowired
+    //private TodoService todoService;
+
 
     // TodoController(TodoService todoService)
-    TodoController(){
+    public TodoController(
+            @Qualifier("anotherTodoService") TodoService todoService,
+            @Qualifier("fakeTodoService")  TodoService todoService2) {
+
         this.todoService = todoService;
+        this.todoService2 = todoService2;
         todoList = new ArrayList<>();
-        todoList.add(new Todo(1,false, "Todo1", 1));
-        todoList.add(new Todo(2,false, "Todo2", 2));
-        //this.todoService = new TodoService();
+        todoList.add(new Todo(1, false, "Todo 1", 1));
+        todoList.add(new Todo(2, true, "Todo 2", 2));
     }
+
+
 
     @GetMapping("/todos")
     public  List<Todo> getTodos(@RequestParam(required = false, defaultValue = "true") Boolean isCompleted){
-        System.out.println("query param is" + isCompleted);
+        System.out.println("query param is" + isCompleted + todoService2.doSomething());
         return  todoList;
     }
 
