@@ -7,6 +7,7 @@ public class FakeTodoService implements TodoService {
     @Override
     @TimeMonitor
     public String doSomething(){
+        System.out.println("Something FakeTodoService");
         return "Something FakeTodoService";
     }
 }
