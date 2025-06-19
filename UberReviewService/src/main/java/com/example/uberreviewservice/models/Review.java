@@ -4,6 +4,7 @@ import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.util.Date;
 
@@ -13,29 +14,15 @@ import java.util.Date;
 @Builder   // lombok - builder pattern
 @NoArgsConstructor  // lombok - default constructor without args ( needed to builder pattern/lombok
 @AllArgsConstructor // lombok - all arg const. ( needed to builder pattern/lombok
-@EntityListeners(AuditingEntityListener.class)  // to solve error of null date with createdAt,updatedAt
 
 @Entity
 @Table(name = "bookingreview") // optional else class_name = table_name
-public class Review {
-    @Id     // this annotation makes PK of table
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // IDENTITY means auto_increment
-    private Long id;
+public class Review extends BaseModel {
 
     @Column(nullable = false)
     private String content;
 
     private Double rating;
-
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP) // format of date obj to be stored ex. TIME, DATE, TIMESTAMP
-    @CreatedDate    // handle it only when object creation
-    private Date createdAt;
-
-    @Column(nullable = false)
-    @Temporal(TemporalType.TIMESTAMP)
-    @LastModifiedDate   // only handle it for object update
-    private Date updatedAt;
 
     @Override
     public String toString(){
