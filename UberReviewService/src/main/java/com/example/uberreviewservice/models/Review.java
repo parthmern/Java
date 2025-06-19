@@ -17,6 +17,9 @@ import java.util.Date;
 
 @Entity
 @Table(name = "bookingreview") // optional else class_name = table_name
+
+@Inheritance(strategy = InheritanceType.JOINED)
+
 public class Review extends BaseModel {
 
     @Column(nullable = false)

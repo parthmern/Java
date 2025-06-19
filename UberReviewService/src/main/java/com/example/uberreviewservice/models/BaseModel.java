@@ -16,7 +16,7 @@ import java.util.Date;
 public abstract class BaseModel {
 
     @Id     // this annotation makes PK of table
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // IDENTITY means auto_increment
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
     @Column(nullable = false)
