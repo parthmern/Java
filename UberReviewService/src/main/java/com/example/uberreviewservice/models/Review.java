@@ -1,13 +1,6 @@
 package com.example.uberreviewservice.models;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-import org.springframework.web.bind.annotation.ModelAttribute;
-
-import java.util.Date;
-
 
 @Getter // lombok - adding all getters func
 @Setter // lombok - adding all setter func
@@ -16,7 +9,7 @@ import java.util.Date;
 @AllArgsConstructor // lombok - all arg const. ( needed to builder pattern/lombok
 
 @Entity
-@Table(name = "bookingreview") // optional else class_name = table_name
+@Table(name = "booking_review") // optional else class_name = table_name
 
 @Inheritance(strategy = InheritanceType.JOINED)
 

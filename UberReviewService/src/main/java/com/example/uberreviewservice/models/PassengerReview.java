@@ -10,4 +10,6 @@ import lombok.Setter;
 public class PassengerReview extends Review {
     private String passengeerReviewContent;
 
+    private String passengerRating;
+
 }
