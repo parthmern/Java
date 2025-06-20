@@ -32,4 +32,7 @@ public class Booking extends BaseModel {
     @ManyToOne
     private Driver driver;
 
+    @ManyToOne
+    private Passenger passenger;
+
 }
