@@ -1,2 +1,16 @@
-# Page
+# MVC
+
+* model - part of code where all bussiness logic decides
+* view - frontend ( what user sees)
+* controller - part of code which is resposible to collect incoming user req and provide the models layer then whatever res model gives, controller take that send it to user
+*
+
+    <figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+<img src=".gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+
+* another
+* ![](<.gitbook/assets/image (1).png>)&#x20;
+
+<img src="broken-reference" alt="" class="gitbook-drawing">
 
