@@ -8,3 +8,5 @@
   * [reviewService](db-interection/reviewservice.md)
 * [inheritance | table rel](inheritance-or-table-rel.md)
 * [Relational mapping, sql, hql](relational-mapping-sql-hql.md)
+* [JPA Queries](jpa-queries.md)
+* [N+1 problem](n+1-problem.md)

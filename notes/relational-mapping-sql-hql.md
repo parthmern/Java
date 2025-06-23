@@ -172,6 +172,11 @@ issue : here sql query issue error cannot detect at compile time so it can give 
 
 -can give you compile time error
 
+```
+@Query("SELECT d FROM Driver d WHERE d.id = :id AND d.licenseNumber = :license")
+    Optional<Driver> hqaFindByIdAndLicenseNumber(Long id, String license);
+```
+
 ```java
     @Query("SELECT d FROM Driver d WHERE d.id = :id AND d.licenseNumber = :ln")
     Optional<Driver> hqaFindByIdAndLicenseNumber(@Param("id") Long id, @Param("ln") String ln);
