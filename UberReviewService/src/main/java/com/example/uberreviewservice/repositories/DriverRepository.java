@@ -15,7 +15,9 @@ public interface DriverRepository extends JpaRepository<Driver, Long> {
     @Query(nativeQuery = true, value = "SELECT * FROM driver WHERE id= :id AND license_number = :license" )
     Optional<Driver> rawFindByIdAndLicenseNumber(Long id, String license);
 
-    @Query("SELECT d FROM Driver d WHERE d.id = :id AND d.licenseNumber = :ln")
-    Optional<Driver> hqaFindByIdAndLicenseNumber(@Param("id") Long id, @Param("ln") String ln);
+    @Query("SELECT d FROM Driver d WHERE d.id = :id AND d.licenseNumber = :license")
+    Optional<Driver> hqaFindByIdAndLicenseNumber(Long id, String license);
+
+    List<Driver> findAllByIdIn(List<Long> driverIds);
 
 }
