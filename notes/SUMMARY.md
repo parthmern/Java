@@ -8,4 +8,3 @@
   * [reviewService](db-interection/reviewservice.md)
 * [inheritance | table rel](inheritance-or-table-rel.md)
 * [Relational mapping, sql, hql](relational-mapping-sql-hql.md)
-* [Page](<README (1).md>)

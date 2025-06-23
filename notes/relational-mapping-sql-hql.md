@@ -158,3 +158,60 @@ from driver you can get bookings with eager loading
 ### RAW query
 
 * optional of driver
+
+```java
+ @Query(nativeQuery = true, value = "SELECT * FROM driver WHERE id= :id AND license_number = :license" )
+    Optional<Driver> rawFindByIdAndLicenseNumber(Long id, String license);
+```
+
+<figure><img src=".gitbook/assets/image (28).png" alt=""><figcaption></figcaption></figure>
+
+issue : here sql query issue error cannot detect at compile time so it can give error on runntime
+
+### HQL&#x20;
+
+-can give you compile time error
+
+```java
+    @Query("SELECT d FROM Driver d WHERE d.id = :id AND d.licenseNumber = :ln")
+    Optional<Driver> hqaFindByIdAndLicenseNumber(@Param("id") Long id, @Param("ln") String ln);
+```
+
+<figure><img src=".gitbook/assets/image (29).png" alt=""><figcaption></figcaption></figure>
+
+* here while receving the Driver we need all details mean whole table that we need to fetch
+* but what if we want to fetch only some collums not the whole table then how ?
+
+{% tabs %}
+{% tab title="JavaScript" %}
+```javascript
+public class DriverBasicInfo {
+    private String name;
+    private String licenseNumber;
+
+    public DriverBasicInfo(String name, String licenseNumber) {
+        this.name = name;
+        this.licenseNumber = licenseNumber;
+    }
+
+    // Getters (and setters if needed)
+}
+
+
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```java
+@Query("SELECT new com.example.dto.DriverBasicInfo(d.name, d.licenseNumber) FROM Driver d WHERE d.id = :id")
+Optional<DriverBasicInfo> findDriverBasicInfoById(@Param("id") Long id);
+```
+{% endtab %}
+{% endtabs %}
+
+{% hint style="info" %}
+**Note:** You must use the full-qualified class name in `SELECT new ...` and the DTO **must have a matching constructor**.
+
+and this DriverBasicInfo alsoo known as DTO&#x20;
+{% endhint %}
+
