@@ -128,7 +128,7 @@ many to  many -> lazy
 many to one -> eager
 {% endhint %}
 
-to enable lazy loading + eager in spjpa
+to enable lazy loading + eager in spjpa  (Spring Boot - Transaction Management Using @Transactional Annotation)
 
 ```
 spring.jpa.properties.hibernate.enable_lazy_load_no_trans=true

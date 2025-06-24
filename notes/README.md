@@ -5,12 +5,12 @@
 * controller - part of code which is resposible to collect incoming user req and provide the models layer then whatever res model gives, controller take that send it to user
 *
 
-    <figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+    <figure><img src=".gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 <img src=".gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
 * another
-* ![](<.gitbook/assets/image (1).png>)&#x20;
+* ![](<.gitbook/assets/image (1) (1) (1).png>)&#x20;
 
 <img src="broken-reference" alt="" class="gitbook-drawing">
 
