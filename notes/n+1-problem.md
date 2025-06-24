@@ -38,6 +38,20 @@ so lazy loading is be the good option here&#x20;
 
 
 
+```java
+List<Long> driverIds = new ArrayList<>(Arrays.asList(1L,2L,3L,4L,5L));
+List<Driver> drivers = driverRepository.findAllByIdIn(driverIds);  
+
+        for(Driver driver : drivers){
+            List<Booking> bookings = driver.getBookings();
+            bookings.forEach(booking -> System.out.println(
+                    booking.getId()
+            ));
+        }
+```
+
+* issue n+1 queries here
+
 How to optimize it ? ( TC )
 
 {% tabs %}
@@ -66,5 +80,31 @@ List<Long> driverIds = new ArrayList<>(Arrays.asList(1L,2L,3L,4L,5L));
 {% endtab %}
 {% endtabs %}
 
+<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
 
+* still we are not getting in proper way so how to fix this
+
+{% hint style="info" %}
+- add @Transactional annotaiton on top of the class inside which we are fetching this \
+  \- this annotation means whatever query are goign to execute inside the method are going to be part of one complete tranasaction
+{% endhint %}
+
+<figure><img src=".gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+
+* within 2 query only we are able to fetch all data
+
+#### another way proper using FetchMode.SUBSELECT
+
+* make sure to set fetchtype = "lazy" for each and every relationship
+* then use fetchmode.subselect&#x20;
+*
+
+    <pre><code><strong>@OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
+    </strong>@Fetch(value = FetchMode.SUBSELECT)
+    private List&#x3C;Booking> bookings = new ArrayList&#x3C;>();
+    </code></pre>
+* then make sure to use @Transactional annotaion of top of the method in which you are calling it
+*
+
+    <figure><img src=".gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 

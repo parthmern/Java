@@ -10,3 +10,5 @@
 * [Relational mapping, sql, hql](relational-mapping-sql-hql.md)
 * [JPA Queries](jpa-queries.md)
 * [N+1 problem](n+1-problem.md)
+* [Example case of FETCH MODE](example-case-of-fetch-mode.md)
+* [DB versioning](db-versioning.md)

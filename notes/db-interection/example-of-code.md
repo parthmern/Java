@@ -3,7 +3,7 @@
 * pure jdbc'
 *
 
-    <figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="broken-reference" alt="" width="563"><figcaption></figcaption></figure>
 
