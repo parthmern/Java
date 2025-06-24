@@ -6,6 +6,7 @@ import com.example.uberreviewservice.models.Review;
 import com.example.uberreviewservice.repositories.BookingRepository;
 import com.example.uberreviewservice.repositories.DriverRepository;
 import com.example.uberreviewservice.repositories.ReviewRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,7 @@ public class ReviewService implements CommandLineRunner {
     private DriverRepository driverRepository;
 
     @Override
+    @Transactional
     public void run(String... args) throws Exception {
         System.out.println("****************"); // spring boot going to call this func first without making obj
 //        // Review R = new Review();
@@ -52,9 +54,16 @@ public class ReviewService implements CommandLineRunner {
 //        System.out.println(dr.get().getName());
 
         List<Long> driverIds = new ArrayList<>(Arrays.asList(1L,2L,3L,4L,5L));
-        List<Driver> drivers = driverRepository.findAllByIdIn(driverIds);   //select d1_0.id,d1_0.created_at,d1_0.license_number,d1_0.name,d1_0.updated_at from driver d1_0 where d1_0.id in (?,?)
+        List<Driver> drivers = driverRepository.findAllByIdIn(driverIds);
 
         List<Booking> bookings = bookingRepository.findAllByDriverIn(drivers);
+
+//        for(Driver driver : drivers){
+//            List<Booking> bookings = driver.getBookings();
+//            bookings.forEach(booking -> System.out.println(
+//                    booking.getId()
+//            ));
+//        }
 
     }
 }
