@@ -12,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter
 @Setter
 @Builder
 @NoArgsConstructor
+@Getter
 @AllArgsConstructor
 
 public class Driver extends BaseModel {
@@ -27,6 +27,6 @@ public class Driver extends BaseModel {
 
     // 1 : n -> driver : booking   (a driver has many booking)
     @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
-    @Fetch(value = FetchMode.SELECT)
+    @Fetch(value = FetchMode.SUBSELECT)
     private List<Booking> bookings = new ArrayList<>();
 }
