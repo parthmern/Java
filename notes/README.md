@@ -10,7 +10,7 @@
 <img src=".gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
 * another
-* ![](<.gitbook/assets/image (1) (1).png>)&#x20;
+* ![](<.gitbook/assets/image (1) (1) (1).png>)&#x20;
 
 <img src="broken-reference" alt="" class="gitbook-drawing">
 

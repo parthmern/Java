@@ -11,4 +11,5 @@
 * [JPA Queries](jpa-queries.md)
 * [N+1 problem](n+1-problem.md)
 * [Example case of FETCH MODE](example-case-of-fetch-mode.md)
-* [DB versioning](db-versioning.md)
+* [DB versioning | DB migration](db-versioning-or-db-migration/README.md)
+  * [JPA explorer not showing issue solve](db-versioning-or-db-migration/jpa-explorer-not-showing-issue-solve.md)
