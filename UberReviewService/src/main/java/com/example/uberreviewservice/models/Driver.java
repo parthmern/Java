@@ -22,6 +22,8 @@ public class Driver extends BaseModel {
 
     private String name;
 
+    private String phoneNumber;
+
     @Column(nullable = false, unique = true)
     private String licenseNumber;
 
