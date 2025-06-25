@@ -38,7 +38,7 @@ spring.jpa.hibernate.ddl-auto=validate
 
 ***
 
-### Flyway
+### Flyway - setup and init migration
 
 {% embed url="https://medium.com/swlh/introduction-of-flyway-with-spring-boot-d7c11145d012" %}
 
@@ -46,4 +46,61 @@ spring.jpa.hibernate.ddl-auto=validate
 * `spring.flyway.baseline-on-migrate=true` in application properties
 * install _JPA buddy plugin_&#x20;
 * [jpa-explorer-not-showing-issue-solve.md](jpa-explorer-not-showing-issue-solve.md "mention") btn not showing
+* click on flyway <mark style="color:red;background-color:orange;">init migration</mark> ( first time migration )
 *
+
+    <figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+*
+
+    <figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+* save it and you got the whole sql file
+* i had no tables in DB rn
+* added some code
+
+```java
+spring.flyway.url=jdbc:mysql://mysql-13f24328-pptl8685-9946.b.aivencloud.com:16510/defaultdb
+spring.flyway.user=avnadmin
+spring.flyway.password=AVNS_I_rzbISG46QB8AW4RZI
+```
+
+```
+implementation 'org.flywaydb:flyway-core:10.14.0'
+	implementation 'org.flywaydb:flyway-mysql:10.14.0'
+	implementation 'com.mysql:mysql-connector-j:8.3.0'
+```
+
+* fixed some error from above things
+* run the server and it has migrated all tables in DB ( there is ddl update - validate in properites )
+* it created all tables
+* to maintain there is one migration history table
+
+<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+
+***
+
+* here from one table/class there is name col which can be null so i removed it \
+  run code - not getting error
+* but there is licenseNumber column which was required and unique, i remove it\
+  I got error - while running code ( Error : schema validation failed )
+
+***
+
+### version migration
+
+* i added one col/attribute in class named Driver
+
+```
+    private String phoneNumber;
+```
+
+* run code - getting error
+* click on "flyway diff migration" button
+*
+
+    <figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+* it shows changes
+*
+
+    <figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+* re-run code and see table in DB that inside driver phonenumber propery added\
+  inside the migration maintain table V2 also added
