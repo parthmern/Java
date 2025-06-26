@@ -17,3 +17,5 @@
 not sure but only working in intellij comunnity version + ( license paid one )\
 i am using free trial
 {% endhint %}
+
+* <mark style="background-color:green;">github student pack has free license</mark>
