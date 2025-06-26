@@ -104,3 +104,20 @@ implementation 'org.flywaydb:flyway-core:10.14.0'
     <figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
 * re-run code and see table in DB that inside driver phonenumber propery added\
   inside the migration maintain table V2 also added
+
+***
+
+### Rollback&#x20;
+
+enterprice verion of flyway there is command named `flyway undo` to revert back to prev verison that you need to run inside _flyway cli_
+
+_it only helpful to for previous migration rollback_
+
+<mark style="background-color:blue;">V1 -> V1 -> V3 -> V4 -> V5 -> V6 -> V7  ( like V7 to V6 )</mark>\ <mark style="background-color:blue;">for ( V7 to V3 ) you need to do manual migration</mark>\
+
+
+if you want to do then you have to write normal migration \
+how ?&#x20;
+
+* delete the col/attribute from class
+* then do flyway migration in new version\

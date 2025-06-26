@@ -220,3 +220,7 @@ Optional<DriverBasicInfo> findDriverBasicInfoById(@Param("id") Long id);
 and this DriverBasicInfo alsoo known as DTO&#x20;
 {% endhint %}
 
+***
+
+#### when to use ?
+
