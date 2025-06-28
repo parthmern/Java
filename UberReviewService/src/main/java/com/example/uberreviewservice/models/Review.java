@@ -20,6 +20,10 @@ public class Review extends BaseModel {
 
     private Double rating;
 
+    @OneToOne(cascade = {CascadeType.ALL}, fetch = FetchType.LAZY)
+    @JoinColumn(nullable = false)
+    private Booking booking; // we have defined a 1:1 relationship between booking and review
+
     @Override
     public String toString(){
         return "Review: " + this.content + " " + this.rating + " " + this.createdAt;

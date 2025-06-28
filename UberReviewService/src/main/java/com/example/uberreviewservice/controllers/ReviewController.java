@@ -1,5 +1,6 @@
 package com.example.uberreviewservice.controllers;
 
+import com.example.uberreviewservice.dtos.CreateReviewDto;
 import com.example.uberreviewservice.models.Review;
 import com.example.uberreviewservice.services.ReviewService;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,7 @@ public class ReviewController {
     }
 
     @PostMapping
-    public ResponseEntity<Review> publishReview(@RequestBody Review request) {
+    public ResponseEntity<Review> publishReview(@RequestBody CreateReviewDto request) {
         Review review = this.reviewService.publishReview(request);
         return new ResponseEntity<>(review, HttpStatus.CREATED);
     }
