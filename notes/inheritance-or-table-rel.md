@@ -4,7 +4,7 @@
 
 ### 1. mapped super class
 
-<figure><img src=".gitbook/assets/image (14).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (14) (1).png" alt=""><figcaption></figcaption></figure>
 
 * This means `BaseModel` fields will be **inherited into Review** and its subclasses.
 * `BaseModel` **does not become its own table** &#x20;
@@ -88,7 +88,7 @@ this thing giving me error like&#x20;
 
 ### 2. single table
 
-<figure><img src=".gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (15) (1).png" alt=""><figcaption></figcaption></figure>
 
 * ```
   @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

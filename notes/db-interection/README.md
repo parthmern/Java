@@ -16,7 +16,7 @@
     * this ORM gives you concrete class of tables of db to interect
     *
 
-        <figure><img src="../.gitbook/assets/image (5) (1).png" alt=""><figcaption></figcaption></figure>
+        <figure><img src="../.gitbook/assets/image (5) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
 

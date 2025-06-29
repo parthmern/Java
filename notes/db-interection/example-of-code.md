@@ -3,20 +3,20 @@
 * pure jdbc'
 *
 
-    <figure><img src="../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (4) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="broken-reference" alt="" width="563"><figcaption></figcaption></figure>
 
 * JPA
 *
 
-    <figure><img src="../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (6) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
     <figure><img src="broken-reference" alt="" width="563"><figcaption></figcaption></figure>
 * ORMs
 *
 
-    <figure><img src="../.gitbook/assets/image (7) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (7) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="broken-reference" alt=""><figcaption></figcaption></figure>
 
