@@ -10,7 +10,7 @@ implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
 ```
 
-<figure><img src="../.gitbook/assets/image (8).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (8) (1).png" alt=""><figcaption></figcaption></figure>
 
 in application.properties file
 
@@ -102,4 +102,4 @@ public interface TodoRepository extends JpaRepository<Todo, Integer> {}
 
 #### start project and see logs
 
-<figure><img src="../.gitbook/assets/image (9).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (9) (1).png" alt=""><figcaption></figcaption></figure>

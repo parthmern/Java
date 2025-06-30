@@ -49,10 +49,10 @@ spring.jpa.hibernate.ddl-auto=validate
 * click on flyway <mark style="color:red;background-color:orange;">init migration</mark> ( first time migration )
 *
 
-    <figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
 *
 
-    <figure><img src="../.gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 * save it and you got the whole sql file
 * i had no tables in DB rn
 * added some code
@@ -74,7 +74,7 @@ implementation 'org.flywaydb:flyway-core:10.14.0'
 * it created all tables
 * to maintain there is one migration history table
 
-<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -97,11 +97,11 @@ implementation 'org.flywaydb:flyway-core:10.14.0'
 * click on "flyway diff migration" button
 *
 
-    <figure><img src="../.gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
 * it shows changes
 *
 
-    <figure><img src="../.gitbook/assets/image (6).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (6) (1).png" alt=""><figcaption></figcaption></figure>
 * re-run code and see table in DB that inside driver phonenumber propery added\
   inside the migration maintain table V2 also added
 
@@ -121,3 +121,24 @@ how ?&#x20;
 
 * delete the col/attribute from class
 * then do flyway migration in new version\
+
+
+***
+
+#### when do we need roolback? there is one change i got&#x20;
+
+* booking can exist without revview&#x20;
+* but review cannot be existed wihtout booking
+
+{% hint style="info" %}
+do not trust generated schema blindly\
+it can give you many faults
+{% endhint %}
+
+***
+
+#### halfway migration issue
+
+* if it breaks at 4version then delete that version row from flyway\_schema\_history table&#x20;
+* solving that issue in that V4.sql file
+* start project again so you
