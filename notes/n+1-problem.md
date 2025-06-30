@@ -80,7 +80,7 @@ List<Long> driverIds = new ArrayList<>(Arrays.asList(1L,2L,3L,4L,5L));
 {% endtab %}
 {% endtabs %}
 
-<figure><img src=".gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * still we are not getting in proper way so how to fix this
 
@@ -89,7 +89,7 @@ List<Long> driverIds = new ArrayList<>(Arrays.asList(1L,2L,3L,4L,5L));
   \- this annotation means whatever query are goign to execute inside the method are going to be part of one complete tranasaction
 {% endhint %}
 
-<figure><img src=".gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 * within 2 query only we are able to fetch all data
 
@@ -106,5 +106,5 @@ List<Long> driverIds = new ArrayList<>(Arrays.asList(1L,2L,3L,4L,5L));
 * then make sure to use @Transactional annotaion of top of the method in which you are calling it
 *
 
-    <figure><img src=".gitbook/assets/image (3) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src=".gitbook/assets/image (3) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 

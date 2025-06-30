@@ -12,13 +12,13 @@ components that provide oAuth function\
 3\) resource server ( serrver of bms, leetcode which has user info )\
 4\) auth service ( google/fb/github server )
 
-<img src="../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
+<img src="../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
 
 * here gogole is working as Auth server
 * but if you want to replace this part with own server then you can make your own auth server \
   with login via email/password
 
-<img src="../.gitbook/assets/file.excalidraw (4).svg" alt="" class="gitbook-drawing">
+<img src="../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
 
 three type of auth\
 1\) token based\
@@ -49,7 +49,7 @@ the bestway to store this is with <mark style="color:purple;">http only cookie</
 
 jwt- json web token
 
-<img src="../.gitbook/assets/file.excalidraw (5).svg" alt="" class="gitbook-drawing">
+<img src="../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
 
 ### implementation
 
@@ -61,7 +61,7 @@ implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
 
 `applicaiton.properties`  file
 
-<figure><img src="../.gitbook/assets/image (36).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
 {% tabs %}
 {% tab title="JwtService" %}
@@ -123,11 +123,12 @@ public class JwtService implements CommandLineRunner {
 {% endtab %}
 {% endtabs %}
 
-<figure><img src="../.gitbook/assets/image (34).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
-<figure><img src="../.gitbook/assets/image (35).png" alt="" width="375"><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (2).png" alt="" width="375"><figcaption></figcaption></figure>
 
-see from token we are able to get data so this token should not be leaked
+see from token we are able to get data so this token should not be leaked\
+so if you loose your jwt token then people can decrypt it
 
 {% tabs %}
 {% tab title="JwtService" %}
@@ -215,3 +216,64 @@ public class JwtService implements CommandLineRunner {
 ```
 {% endtab %}
 {% endtabs %}
+
+-Object as class in java - [https://chatgpt.com/share/6862758f-b25c-8010-8769-e7a9f35236f3](https://chatgpt.com/share/6862758f-b25c-8010-8769-e7a9f35236f3)\
+\- when int vs Integer ? - [https://semih-turan.medium.com/understanding-the-difference-between-int-and-integer-in-java-300f24333ef4](https://semih-turan.medium.com/understanding-the-difference-between-int-and-integer-in-java-300f24333ef4)
+
+
+
+### UserDetailsService - spring security&#x20;
+
+{% embed url="https://medium.com/@ihor.polataiko/spring-security-guide-part-4-out-of-the-box-implementations-http-basic-with-userdetailsservice-9ec3360c66ed" %}
+
+<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+
+-spring security works on UserDetails polymorphic type for auth
+
+```java
+
+public class AuthPassengerDetails extends Passenger implements UserDetails {
+
+    private String username;
+
+    private String password;
+
+    public AuthPassengerDetails(Passenger passenger){
+        this.username = passenger.getEmail();   // unique
+        this.password = passenger.getPassword();
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
+    }
+
+    @Override
+    public String getUsername() {
+        return this.username;
+    }
+
+    // below methods are not much imp due to business logic of ours
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    }
+}
+```
+

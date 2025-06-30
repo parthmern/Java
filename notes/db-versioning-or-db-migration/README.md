@@ -52,7 +52,7 @@ spring.jpa.hibernate.ddl-auto=validate
     <figure><img src="../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
 *
 
-    <figure><img src="../.gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (2) (1) (1).png" alt=""><figcaption></figcaption></figure>
 * save it and you got the whole sql file
 * i had no tables in DB rn
 * added some code
@@ -74,7 +74,7 @@ implementation 'org.flywaydb:flyway-core:10.14.0'
 * it created all tables
 * to maintain there is one migration history table
 
-<figure><img src="../.gitbook/assets/image (3) (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (3) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 ***
 
@@ -97,7 +97,7 @@ implementation 'org.flywaydb:flyway-core:10.14.0'
 * click on "flyway diff migration" button
 *
 
-    <figure><img src="../.gitbook/assets/image (4) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (4) (1) (1).png" alt=""><figcaption></figcaption></figure>
 * it shows changes
 *
 
