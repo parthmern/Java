@@ -1,22 +1,84 @@
-<!-- save this as test.html and open in browser -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JWT Cookie Demo</title>
+</head>
 <body>
-<p>api</p>
+<h2>Login to Uber Auth Service</h2>
+
+<form id="login-form">
+    <label>Email: <input type="email" id="email" required></label><br><br>
+    <label>Password: <input type="password" id="password" required></label><br><br>
+    <button type="submit">Login</button>
+</form>
+
+<h3>Login Result:</h3>
+<pre id="login-result" style="background:#f4f4f4; padding:10px;"></pre>
+
+<h3>Token Visibility:</h3>
+
+<div style="background:#e0ffe0; padding:10px; margin-bottom:10px;">
+    <strong>httpOnly: false</strong>
+    <p>If the server does NOT set the token as HttpOnly, and instead includes it in the response body, it will be shown below:</p>
+    <pre id="visible-token" style="background:#fff; padding:10px;"></pre>
+</div>
+
+<div style="background:#ffe0e0; padding:10px;">
+    <strong>httpOnly: true</strong>
+    <p>If the server sets the token as an <code>HttpOnly</code> cookie, it is sent with requests but <strong>not visible</strong> to JavaScript.</p>
+    <p>We can’t display it here, but it will still be sent with the request to /validate.</p>
+</div>
+
+<button id="validate-btn" style="margin-top: 10px;">Validate Token</button>
+
+<h3>Validation Result:</h3>
+<pre id="validate-result" style="background:#f4f4f4; padding:10px;"></pre>
+
 <script>
-    fetch('http://localhost:4000/api/v1/auth/signin/passenger', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            email: 'pptl8685@gmail.com',
-            password: '12345'
+    let jwtToken = null; // only used for httpOnly: false demo
+
+    document.getElementById('login-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        fetch('http://localhost:4000/api/v1/auth/signin/passenger', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include', // ✅ important
+            body: JSON.stringify({ email, password })
         })
-    })
-        .then(response => response.json())
-        .then(data => console.log(' Success:', data))
-        .catch(error => console.error(' Error:', error));
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('login-result').textContent = `Login Response:\n${JSON.stringify(data, null, 2)}`;
+
+                // ✅ Try to read non-HttpOnly cookie
+                const allCookies = document.cookie;
+                document.getElementById('visible-token').textContent = allCookies || 'No accessible cookies found.';
+            })
+            .catch(error => {
+                document.getElementById('login-result').textContent = `❌ Login failed:\n${error}`;
+            });
+    });
+
+
+    document.getElementById('validate-btn').addEventListener('click', function () {
+        fetch('http://localhost:4000/api/v1/auth/validate', {
+            method: 'GET',
+            credentials: 'include' // needed to send HttpOnly cookie
+        })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('validate-result').textContent = `✅ Validation:\n${JSON.stringify(data, null, 2)}`;
+            })
+            .catch(error => {
+                document.getElementById('validate-result').textContent = `❌ Validation failed:\n${error}`;
+            });
+    });
 </script>
 </body>
 </html>

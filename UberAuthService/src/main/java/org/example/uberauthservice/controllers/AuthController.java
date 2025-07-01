@@ -1,6 +1,8 @@
 package org.example.uberauthservice.controllers;
 
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.example.uberauthservice.dtos.AuthRequestDto;
 import org.example.uberauthservice.dtos.AuthResponseDto;
@@ -19,6 +21,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -60,6 +63,19 @@ public class AuthController {
         }else{
             return new ResponseEntity<>("Auth not successful", HttpStatus.OK);
         }
+    }
+
+    @GetMapping("/validate")
+    public ResponseEntity<?> isValidate(HttpServletRequest request){
+        List<Cookie> cookies = List.of(request.getCookies());
+        if(!cookies.isEmpty()){
+            for (Cookie cookie : cookies){
+                System.out.println(cookie.getName() + " " + cookie.getValue());
+            }
+        }else {
+            System.out.println("cookie is empty");
+        }
+        return new ResponseEntity<>("Success", HttpStatus.OK);
     }
 
 }
