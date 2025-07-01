@@ -12,7 +12,7 @@ components that provide oAuth function\
 3\) resource server ( serrver of bms, leetcode which has user info )\
 4\) auth service ( google/fb/github server )
 
-<img src="../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+<img src="../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
 
 * here gogole is working as Auth server
 * but if you want to replace this part with own server then you can make your own auth server \
@@ -276,4 +276,63 @@ public class AuthPassengerDetails extends Passenger implements UserDetails {
     }
 }
 ```
+
+### AuthenticationProvider
+
+<img src="../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+
+```java
+// SpringSecurity.java class
+
+@Configuration // spring knows about this class and
+                // will handle everything that we are going to mention inside class
+@EnableWebSecurity  // enables Spring Security's web security features, you can add filter
+public class SpringSecurity {
+    
+    @Bean
+    public UserDetailsService userDetailsService(){
+        return new UserDetailsServiceImpl();
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .cors(cors -> cors.disable())
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/api/v1/auth", "/api/v1/auth/**").permitAll() // allow public access
+                        .anyRequest().authenticated() // secure all other endpoints
+                );
+        return http.build();
+    }
+
+    @Bean
+    public AuthenticationProvider authenticationProvider(){
+        DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
+        authenticationProvider.setUserDetailsService(userDetailsService());
+        authenticationProvider.setPasswordEncoder(passwordEncoder());
+        return authenticationProvider;
+    }
+    
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration configuration) throws Exception{
+        return configuration.getAuthenticationManager();
+    }
+    
+    @Bean
+    public PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public BCryptPasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
+}
+
+```
+
+
+
+( too complex learn from somewhere else \_)
 
