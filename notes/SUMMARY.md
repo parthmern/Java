@@ -19,3 +19,4 @@
 * [more about migration in diff microservices](more-about-migration-in-diff-microservices.md)
 * [authN and authZ](authn-and-authz/README.md)
   * [oAuth | JWT](authn-and-authz/oauth-or-jwt.md)
+* [JWT token access](jwt-token-access.md)

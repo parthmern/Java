@@ -7,7 +7,7 @@
 
     <figure><img src=".gitbook/assets/image (4) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 
-<img src=".gitbook/assets/file.excalidraw (1) (1) (1).svg" alt="" class="gitbook-drawing">
+<img src=".gitbook/assets/file.excalidraw (5).svg" alt="" class="gitbook-drawing">
 
 * another
 * ![](<.gitbook/assets/image (1) (1) (1) (1) (1) (1).png>)&#x20;
