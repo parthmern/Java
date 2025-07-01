@@ -25,15 +25,15 @@ public class PassengerSignupRequestDto {
 
 * i need some more attributes in Passenger table so I did changes in Auth service
 
-<figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src=".gitbook/assets/image (4).png" alt=""><figcaption></figcaption></figure>
 
 * ( this changes are only done in AuthService )
 * run code - <mark style="background-color:green;">got validation error</mark>
 * so you need to do migration  ( this will not be init migration bcz we already created that before in ReviewService for first time, here we are interecting with that same db)
 * click on "flyway diff version migration" \
-  &#x20;![](<.gitbook/assets/image (3).png>) ( same as below img)
+  &#x20;![](<.gitbook/assets/image (3) (1).png>) ( same as below img)
 
-<img src=".gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+<img src=".gitbook/assets/file.excalidraw (4).svg" alt="" class="gitbook-drawing">
 
 * here always read this automatic generated migration files they are not accurate and now you need to do changes according to you know
 * so now my final file looks like

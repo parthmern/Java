@@ -2,7 +2,7 @@
 
 * [Part1](README.md)
   * [Starting notes Notion](https://brazen-pantry-a23.notion.site/Java-springboot-1f2c49f9d7d68010938ae6d1745dcf2b)
-* [MVC](<README (1).md>)
+* [MVC](mvc.md)
 * [HLD - uber](hld-uber.md)
 * [DB interection](db-interection/README.md)
   * [example of code](db-interection/example-of-code.md)
@@ -15,6 +15,7 @@
 * [Example case of FETCH MODE](example-case-of-fetch-mode.md)
 * [DB versioning | DB migration](db-versioning-or-db-migration/README.md)
   * [JPA explorer not showing issue solve](db-versioning-or-db-migration/jpa-explorer-not-showing-issue-solve.md)
-* [DTOs](dtos.md)
+* [DTOs ( adapter pattern )](dtos-adapter-pattern.md)
 * [more about migration in diff microservices](more-about-migration-in-diff-microservices.md)
-* [authN and authZ](authn-and-authz.md)
+* [authN and authZ](authn-and-authz/README.md)
+  * [oAuth | JWT](authn-and-authz/oauth-or-jwt.md)
