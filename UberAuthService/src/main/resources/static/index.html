@@ -1,0 +1,22 @@
+<!-- save this as test.html and open in browser -->
+<!DOCTYPE html>
+<html>
+<body>
+<p>api</p>
+<script>
+    fetch('http://localhost:4000/api/v1/auth/signin/passenger', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email: 'pptl8685@gmail.com',
+            password: '12345'
+        })
+    })
+        .then(response => response.json())
+        .then(data => console.log(' Success:', data))
+        .catch(error => console.error(' Error:', error));
+</script>
+</body>
+</html>
