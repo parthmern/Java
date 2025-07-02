@@ -4,7 +4,7 @@
 * loig via google/gb/linkedin
 * login through sso
 * login via movile sms otp
-  * <mark style="color:yellow;">OAuth (Open Authorization)  is the one who is behind it to maintain that all</mark>
+  * <mark style="color:yellow;">OAuth (Open Authorization) is the one who is behind it to maintain that all</mark>
 
 components that provide oAuth function\
 1\) resource owner ( user itself )\
@@ -12,27 +12,26 @@ components that provide oAuth function\
 3\) resource server ( serrver of bms, leetcode which has user info )\
 4\) auth service ( google/fb/github server )
 
-<img src="../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
+<img src="../.gitbook/assets/file.excalidraw (1) (1).svg" alt="" class="gitbook-drawing">
 
 * here gogole is working as Auth server
-* but if you want to replace this part with own server then you can make your own auth server \
+* but if you want to replace this part with own server then you can make your own auth server\
   with login via email/password
 
-<img src="../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
+<img src="../.gitbook/assets/file.excalidraw (2) (1).svg" alt="" class="gitbook-drawing">
 
 three type of auth\
 1\) token based\
 2\) session based\
-3\) hybrid ( token+session)\
-
+3\) hybrid ( token+session)\\
 
 ***
 
-<mark style="background-color:red;">**session based**</mark> \
-Hotstart ( max 4 device login ) \
+<mark style="background-color:red;">**session based**</mark>\
+Hotstart ( max 4 device login )\
 when you try to login in 5th device it prompts you that you have "4 device already loggedin" -> session based auth\
-when you login, hotstart gives token to client and it stores in DB ( like token information, when was it geenrated, location where it is generated etc. ) this token known as session id \
-this session id is present with user + in backend(db) \
+when you login, hotstart gives token to client and it stores in DB ( like token information, when was it geenrated, location where it is generated etc. ) this token known as session id\
+this session id is present with user + in backend(db)\
 \
 cleint is goign to store that session id somewhere and when it send req it sends it to hotstar server then it check if session id present in DB or not if yes then you are authorized else not\
 \
@@ -59,7 +58,7 @@ implementation 'io.jsonwebtoken:jjwt-api:0.12.5'
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
 ```
 
-`applicaiton.properties`  file
+`applicaiton.properties` file
 
 <figure><img src="../.gitbook/assets/image (3).png" alt=""><figcaption></figcaption></figure>
 
@@ -123,7 +122,7 @@ public class JwtService implements CommandLineRunner {
 {% endtab %}
 {% endtabs %}
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../.gitbook/assets/image (2).png" alt="" width="375"><figcaption></figcaption></figure>
 
@@ -220,13 +219,11 @@ public class JwtService implements CommandLineRunner {
 -Object as class in java - [https://chatgpt.com/share/6862758f-b25c-8010-8769-e7a9f35236f3](https://chatgpt.com/share/6862758f-b25c-8010-8769-e7a9f35236f3)\
 \- when int vs Integer ? - [https://semih-turan.medium.com/understanding-the-difference-between-int-and-integer-in-java-300f24333ef4](https://semih-turan.medium.com/understanding-the-difference-between-int-and-integer-in-java-300f24333ef4)
 
-
-
-### UserDetailsService - spring security&#x20;
+### UserDetailsService - spring security
 
 {% embed url="https://medium.com/@ihor.polataiko/spring-security-guide-part-4-out-of-the-box-implementations-http-basic-with-userdetailsservice-9ec3360c66ed" %}
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 -spring security works on UserDetails polymorphic type for auth
 
@@ -279,7 +276,7 @@ public class AuthPassengerDetails extends Passenger implements UserDetails {
 
 ### AuthenticationProvider
 
-<img src="../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+<img src="../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
 
 ```java
 // SpringSecurity.java class
@@ -332,7 +329,4 @@ public class SpringSecurity {
 
 ```
 
-
-
 ( too complex learn from somewhere else \_)
-
