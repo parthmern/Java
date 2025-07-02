@@ -1,4 +1,4 @@
-# Untitled
+# Filters
 
 \
 JWT token access
@@ -23,8 +23,8 @@ JWT token access
 
 #### spring interceptor <a href="#spring-interceptor" id="spring-interceptor"></a>
 
-​
+( learn from online article )
 
 #### spring filters <a href="#spring-filters" id="spring-filters"></a>
 
-\
+<img src=".gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">

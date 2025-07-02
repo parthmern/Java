@@ -12,13 +12,13 @@ components that provide oAuth function\
 3\) resource server ( serrver of bms, leetcode which has user info )\
 4\) auth service ( google/fb/github server )
 
-<img src="../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
+<img src="../.gitbook/assets/file.excalidraw (1) (1).svg" alt="" class="gitbook-drawing">
 
 * here gogole is working as Auth server
 * but if you want to replace this part with own server then you can make your own auth server\
   with login via email/password
 
-<img src="../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
+<img src="../.gitbook/assets/file.excalidraw (2) (1).svg" alt="" class="gitbook-drawing">
 
 three type of auth\
 1\) token based\
@@ -122,7 +122,7 @@ public class JwtService implements CommandLineRunner {
 {% endtab %}
 {% endtabs %}
 
-<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1) (1).png" alt=""><figcaption></figcaption></figure>
 
 <figure><img src="../.gitbook/assets/image (2).png" alt="" width="375"><figcaption></figcaption></figure>
 
@@ -223,7 +223,7 @@ public class JwtService implements CommandLineRunner {
 
 {% embed url="https://medium.com/@ihor.polataiko/spring-security-guide-part-4-out-of-the-box-implementations-http-basic-with-userdetailsservice-9ec3360c66ed" %}
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 -spring security works on UserDetails polymorphic type for auth
 
@@ -276,7 +276,7 @@ public class AuthPassengerDetails extends Passenger implements UserDetails {
 
 ### AuthenticationProvider
 
-<img src="../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+<img src="../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
 
 ```java
 // SpringSecurity.java class
