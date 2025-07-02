@@ -51,6 +51,7 @@ public class SpringSecurity implements WebMvcConfigurer {
 
     @Bean
     public AuthenticationProvider authenticationProvider(){
+        System.out.println("authenticationProvider- DaoAuthenticationProvider called");
         DaoAuthenticationProvider authenticationProvider = new DaoAuthenticationProvider();
         authenticationProvider.setUserDetailsService(userDetailsService());
         authenticationProvider.setPasswordEncoder(encoder());

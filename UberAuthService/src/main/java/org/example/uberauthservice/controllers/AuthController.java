@@ -49,7 +49,11 @@ public class AuthController {
     @PostMapping("/signin/passenger")
     public ResponseEntity<?> signIn(@RequestBody AuthRequestDto authRequestDto, HttpServletResponse response){
         System.out.println("/signin/passenger hitted" + authRequestDto.getEmail() + authRequestDto.getPassword());
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequestDto.getEmail(), authRequestDto.getPassword()));
+
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(authRequestDto.getEmail(), authRequestDto.getPassword())
+        );
+
         if(authentication.isAuthenticated()){
             String jwtToken = jwtService.createToken(authRequestDto.getEmail());
             ResponseCookie cookie = ResponseCookie.from("JwtToken", jwtToken)
