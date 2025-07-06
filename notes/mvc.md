@@ -12,6 +12,6 @@
 <img src=".gitbook/assets/file.excalidraw (1) (1) (1) (1).svg" alt="" class="gitbook-drawing">
 
 * another
-* ![](<.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1).png>)
+* ![](<.gitbook/assets/image (1) (1) (1) (1) (1) (1) (1) (1).png>)
 
 ![](broken-reference)

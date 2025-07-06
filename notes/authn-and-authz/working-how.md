@@ -34,7 +34,7 @@ private PasswordEncoder encoder;
 
 And Spring **automatically injects** the bean you defined earlier.
 
-<figure><img src="../.gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+<figure><img src="../.gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
 ### execution flow ( authentication using spring security )
 
