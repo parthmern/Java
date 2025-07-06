@@ -2,6 +2,7 @@ package org.example.uberauthservice.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.example.uberentityservice.models.BaseModel;
 
 import java.util.Date;
 

@@ -1,4 +1,4 @@
-package org.example.uberauthservice.models;
+package org.example.uberentityservice.models;
 
 import jakarta.persistence.*;
 import lombok.Getter;
