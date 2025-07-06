@@ -1,7 +1,7 @@
 package org.example.uberauthservice.dtos;
 
 import lombok.*;
-import org.example.uberauthservice.models.Passenger;
+import org.example.uberentityservice.models.Passenger;
 
 import java.util.Date;
 

@@ -44,7 +44,7 @@ dependencies {
     runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.12.5'
 
     // maven local common lib
-    implementation "org.example:UberEntityService:0.0.1-SNAPSHOT"
+    implementation "org.example:UberEntityService:0.0.2-SNAPSHOT"
 }
 
 tasks.named('test') {
