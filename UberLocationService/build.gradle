@@ -20,6 +20,9 @@ configurations {
 }
 
 repositories {
+    maven {
+        url = uri("${project.rootDir}/../UberEntityService/")  // match the path used above
+    }
     mavenCentral()
 }
 
@@ -32,6 +35,9 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    implementation "redis.clients:jedis:5.1.2"
+
 }
 
 tasks.named('test') {
