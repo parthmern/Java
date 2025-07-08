@@ -3,11 +3,12 @@
   <groupId>org.example</groupId>
   <artifactId>UberEntityService</artifactId>
   <versioning>
-    <latest>0.0.2-SNAPSHOT</latest>
+    <latest>0.0.3-SNAPSHOT</latest>
     <versions>
       <version>0.0.1-SNAPSHOT</version>
       <version>0.0.2-SNAPSHOT</version>
+      <version>0.0.3-SNAPSHOT</version>
     </versions>
-    <lastUpdated>20250706231800</lastUpdated>
+    <lastUpdated>20250708113826</lastUpdated>
   </versioning>
 </metadata>

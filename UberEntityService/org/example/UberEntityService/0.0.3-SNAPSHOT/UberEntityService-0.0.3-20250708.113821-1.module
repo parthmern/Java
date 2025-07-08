@@ -1,0 +1,97 @@
+{
+  "formatVersion": "1.1",
+  "component": {
+    "group": "org.example",
+    "module": "UberEntityService",
+    "version": "0.0.3-SNAPSHOT",
+    "attributes": {
+      "org.gradle.status": "integration"
+    }
+  },
+  "createdBy": {
+    "gradle": {
+      "version": "8.14.2"
+    }
+  },
+  "variants": [
+    {
+      "name": "apiElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 24,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-api"
+      },
+      "files": [
+        {
+          "name": "UberEntityService-0.0.3-SNAPSHOT-plain.jar",
+          "url": "UberEntityService-0.0.3-SNAPSHOT-plain.jar",
+          "size": 34365,
+          "sha512": "ae2cd358f856dd0250d3bf4c49eda015bf74cf6ad990d385935c79b7891a4e62b8d083917bb2a78d1f53fff5066ab227923c532bde454f1e8dc9b2b9f11313f5",
+          "sha256": "4b88233db5885335555ce45bb20147a10f34db5d9174da96ac6828ae4e0a495b",
+          "sha1": "b65633e50cda685900009744cdaa99250dd4f034",
+          "md5": "62fa3fae16d39467f9099fe1f5418db6"
+        }
+      ]
+    },
+    {
+      "name": "runtimeElements",
+      "attributes": {
+        "org.gradle.category": "library",
+        "org.gradle.dependency.bundling": "external",
+        "org.gradle.jvm.version": 24,
+        "org.gradle.libraryelements": "jar",
+        "org.gradle.usage": "java-runtime"
+      },
+      "dependencies": [
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-data-jpa",
+          "version": {
+            "requires": "3.5.3"
+          }
+        },
+        {
+          "group": "org.flywaydb",
+          "module": "flyway-core",
+          "version": {
+            "requires": "11.7.2"
+          }
+        },
+        {
+          "group": "org.flywaydb",
+          "module": "flyway-mysql",
+          "version": {
+            "requires": "11.7.2"
+          }
+        },
+        {
+          "group": "org.springframework.boot",
+          "module": "spring-boot-starter-validation",
+          "version": {
+            "requires": "3.5.3"
+          }
+        },
+        {
+          "group": "com.mysql",
+          "module": "mysql-connector-j",
+          "version": {
+            "requires": "9.2.0"
+          }
+        }
+      ],
+      "files": [
+        {
+          "name": "UberEntityService-0.0.3-SNAPSHOT-plain.jar",
+          "url": "UberEntityService-0.0.3-SNAPSHOT-plain.jar",
+          "size": 34365,
+          "sha512": "ae2cd358f856dd0250d3bf4c49eda015bf74cf6ad990d385935c79b7891a4e62b8d083917bb2a78d1f53fff5066ab227923c532bde454f1e8dc9b2b9f11313f5",
+          "sha256": "4b88233db5885335555ce45bb20147a10f34db5d9174da96ac6828ae4e0a495b",
+          "sha1": "b65633e50cda685900009744cdaa99250dd4f034",
+          "md5": "62fa3fae16d39467f9099fe1f5418db6"
+        }
+      ]
+    }
+  ]
+}
