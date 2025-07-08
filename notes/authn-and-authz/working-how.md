@@ -38,7 +38,7 @@ And Spring **automatically injects** the bean you defined earlier.
 
 ### execution flow ( authentication using spring security )
 
-<img src="../.gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+<img src="../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
 
 [https://youtu.be/qvAoUVXgpZg?si=Y8XI\_cehMbay3Gxj](https://youtu.be/qvAoUVXgpZg?si=Y8XI_cehMbay3Gxj) \
 this video good
