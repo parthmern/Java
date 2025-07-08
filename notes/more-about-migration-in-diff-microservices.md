@@ -125,3 +125,13 @@ migration is fuped
 
 
 
+{% hint style="info" %}
+even sometimes when you are tired in dev-mode\
+\
+drop database defaultdb;\
+create database defaultdb;\
+use defaultdb;\
+\
+do this
+{% endhint %}
+
