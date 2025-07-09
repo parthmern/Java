@@ -27,4 +27,4 @@ JWT token access
 
 #### spring filters <a href="#spring-filters" id="spring-filters"></a>
 
-<img src=".gitbook/assets/file.excalidraw (1) (1).svg" alt="" class="gitbook-drawing">
+<img src=".gitbook/assets/file.excalidraw (1) (1) (1).svg" alt="" class="gitbook-drawing">

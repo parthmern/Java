@@ -22,3 +22,5 @@
   * [Working how?](authn-and-authz/working-how.md)
 * [Filters](filters.md)
 * [Common Library](common-library.md)
+* [Indexing in DB](indexing-in-db.md)
+* [Geospatial Data](geospatial-data.md)

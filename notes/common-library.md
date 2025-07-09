@@ -1,3 +1,9 @@
+---
+cover: >-
+  https://images.unsplash.com/photo-1579546928937-641f7ac9bced?crop=entropy&cs=srgb&fm=jpg&ixid=M3wxOTcwMjR8MHwxfHNlYXJjaHw5fHxncmFkaWVudHxlbnwwfHx8fDE3NTE5NzMyNTR8MA&ixlib=rb-4.1.0&q=85
+coverY: 0
+---
+
 # Common Library
 
 we have same models in different micreoservce till now\
@@ -11,7 +17,7 @@ that was creating issues/conflicts for us
 * also configure all applicaiton.yml&#x20;
 *
 
-    <figure><img src=".gitbook/assets/image.png" alt=""><figcaption></figcaption></figure>
+    <figure><img src=".gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
 * it is shutting down automatiically brecause we donot have spring web but it is working
 
 \
