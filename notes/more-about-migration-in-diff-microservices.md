@@ -33,7 +33,7 @@ public class PassengerSignupRequestDto {
 * click on "flyway diff version migration" \
   &#x20;![](<.gitbook/assets/image (3) (1).png>) ( same as below img)
 
-<img src=".gitbook/assets/file.excalidraw (4).svg" alt="" class="gitbook-drawing">
+<img src=".gitbook/assets/file.excalidraw (4) (1).svg" alt="" class="gitbook-drawing">
 
 * here always read this automatic generated migration files they are not accurate and now you need to do changes according to you know
 * so now my final file looks like
