@@ -1,7 +1,9 @@
 package org.example.uberlocationservice.controllers;
 
+import org.example.uberlocationservice.dtos.DriverLocationDto;
 import org.example.uberlocationservice.dtos.NearbyDriversRequestDto;
 import org.example.uberlocationservice.dtos.SaveDriverLocationDto;
+import org.example.uberlocationservice.services.LocationService;
 import org.springframework.data.geo.*;
 import org.springframework.data.redis.connection.RedisGeoCommands;
 import org.springframework.data.redis.core.GeoOperations;
@@ -21,46 +23,32 @@ import java.util.List;
 @RequestMapping("/api/location")
 public class LocationController {
 
-    private StringRedisTemplate stringRedisTemplate;
+    private LocationService locationService;
 
-    private static final String DRIVER_GEO_OPS_KEY = "drivers";
-    private static final Double SEARCH_RADIUS = 5.0;
-
-    public LocationController(StringRedisTemplate stringRedisTemplate){
-        this.stringRedisTemplate = stringRedisTemplate;
+    public LocationController(LocationService locationService){
+        this.locationService = locationService;
     }
 
     @PostMapping("/drivers")
     public ResponseEntity<Boolean> saveDriverLocation(@RequestBody SaveDriverLocationDto saveDriverLocationDto){
         try {
-            GeoOperations<String, String> getOps = stringRedisTemplate.opsForGeo();
-            getOps.add(DRIVER_GEO_OPS_KEY,
-                    new RedisGeoCommands.GeoLocation<>(
-                            saveDriverLocationDto.getDriverId(),
-                            new Point(saveDriverLocationDto.getLatitude(), saveDriverLocationDto.getLongitude())
-                    ));
-            return new ResponseEntity<>(true, HttpStatus.CREATED);
+            Boolean res = locationService.saveDriverLocation(saveDriverLocationDto.getDriverId(), saveDriverLocationDto.getLatitude(), saveDriverLocationDto.getLongitude());
+            return new ResponseEntity<>(res, HttpStatus.CREATED);
         }catch (Exception e){
             return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PostMapping("/nearby/drivers")
-    public ResponseEntity<List<String>> getNearbyDrivers(@RequestBody NearbyDriversRequestDto nearbyDriversRequestDto){
+    public ResponseEntity<List<DriverLocationDto>> getNearbyDrivers(@RequestBody NearbyDriversRequestDto nearbyDriversRequestDto){
         try{
-            GeoOperations<String, String> getOps = stringRedisTemplate.opsForGeo();
-            Distance radius = new Distance(SEARCH_RADIUS, Metrics.KILOMETERS);    // 5KM
-            Circle within = new Circle(new Point(nearbyDriversRequestDto.getLatitude(), nearbyDriversRequestDto.getLongitude()), radius);
-            GeoResults<RedisGeoCommands.GeoLocation<String>> results = getOps.radius(DRIVER_GEO_OPS_KEY, within);
-            List<String> drivers = new ArrayList<>();
-            for(GeoResult<RedisGeoCommands.GeoLocation<String>> result : results){
-                drivers.add(result.getContent().getName());
-            }
+            List<DriverLocationDto> drivers = locationService.getNearbyDrivers(
+                    nearbyDriversRequestDto.getLatitude(),
+                    nearbyDriversRequestDto.getLongitude()
+            );
             return new ResponseEntity<>(drivers, HttpStatus.OK);
         }catch (Exception e){
             return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
 }
