@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket SockJS Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+</head>
+<body>
+<h2>WebSocket SockJS Ping Test</h2>
+<button onclick="connect()">Connect</button>
+<button onclick="sendMessage()">Send Ping</button>
+<div id="response"></div>
+<div id="response-scheduled"></div>
+
+<script>
+    let stompClient = null;
+
+    function connect() {
+        const socket = new SockJS('http://localhost:8080/ws');
+        stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, function () {
+            console.log('Connected sucesss');
+            stompClient.subscribe('/topic/ping', function (message) {
+                console.log("/topic/ping hitted from server ==", message);
+                document.getElementById('response').innerText = 'Response: ' + message.body;
+            });
+
+            stompClient.subscribe("/topic/scheduled", function (msg){
+                console.log("/topic/scheduled hitted from serer ==> ", msg);
+                document.getElementById('response-scheduled').innerHTML += `<p>${msg.body}</p>`;
+            })
+        });
+    }
+
+    function sendMessage() {
+        const request = {
+            data: "Hello from client"
+        };
+        // send to server
+        stompClient.send("/app/ping", {}, JSON.stringify(request));
+    }
+</script>
+</body>
+</html>
