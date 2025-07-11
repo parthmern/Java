@@ -24,4 +24,4 @@ i am using free trial
 
 one other thing to take care ( helps flyway to understand better while doing diff migration )
 
-<img src="../.gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
+<img src="../.gitbook/assets/file.excalidraw (4).svg" alt="" class="gitbook-drawing">

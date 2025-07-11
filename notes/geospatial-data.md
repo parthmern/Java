@@ -23,7 +23,7 @@
 
 <figure><img src=".gitbook/assets/image (1).png" alt=""><figcaption></figcaption></figure>
 
-<img src=".gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+<img src=".gitbook/assets/file.excalidraw (3) (1).svg" alt="" class="gitbook-drawing">
 
 ### integrating redis
 
@@ -67,6 +67,77 @@ public RedisTemplate<String, String> redisTemplate() {
 ```
 
 ```
-// location-controller.js
-
+// .js
 ```
+
+— location controller. java
+
+{% tabs %}
+{% tab title="JavaScript" %}
+```javascript
+
+@Controller
+@RequestMapping("/api/location")
+public class LocationController {
+
+    private StringRedisTemplate stringRedisTemplate;
+
+    private static final String DRIVER_GEO_OPS_KEY = "drivers";
+    private static final Double SEARCH_RADIUS = 5.0;
+
+    public LocationController(StringRedisTemplate stringRedisTemplate){
+        this.stringRedisTemplate = stringRedisTemplate;
+    }
+
+    @PostMapping("/drivers")
+    public ResponseEntity<Boolean> saveDriverLocation(@RequestBody SaveDriverLocationDto saveDriverLocationDto){
+        try {
+            GeoOperations<String, String> getOps = stringRedisTemplate.opsForGeo();
+            getOps.add(DRIVER_GEO_OPS_KEY,
+                    new RedisGeoCommands.GeoLocation<>(
+                            saveDriverLocationDto.getDriverId(),
+                            new Point(saveDriverLocationDto.getLatitude(), saveDriverLocationDto.getLongitude())
+                    ));
+            return new ResponseEntity<>(true, HttpStatus.CREATED);
+        }catch (Exception e){
+            return new ResponseEntity<>(false, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PostMapping("/nearby/drivers")
+    public ResponseEntity<List<String>> getNearbyDrivers(@RequestBody NearbyDriversRequestDto nearbyDriversRequestDto){
+        try{
+            GeoOperations<String, String> getOps = stringRedisTemplate.opsForGeo();
+            Distance radius = new Distance(SEARCH_RADIUS, Metrics.KILOMETERS);    // 5KM
+            Circle within = new Circle(new Point(nearbyDriversRequestDto.getLatitude(), nearbyDriversRequestDto.getLongitude()), radius);
+            GeoResults<RedisGeoCommands.GeoLocation<String>> results = getOps.radius(DRIVER_GEO_OPS_KEY, within);
+            List<String> drivers = new ArrayList<>();
+            for(GeoResult<RedisGeoCommands.GeoLocation<String>> result : results){
+                drivers.add(result.getContent().getName());
+            }
+            return new ResponseEntity<>(drivers, HttpStatus.OK);
+        }catch (Exception e){
+            return new ResponseEntity<>(new ArrayList<>(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
+}
+;
+```
+{% endtab %}
+
+{% tab title="Python" %}
+```python
+message = "hello world"
+print(message)
+```
+{% endtab %}
+
+{% tab title="Ruby" %}
+```ruby
+message = "hello world"
+puts message
+```
+{% endtab %}
+{% endtabs %}

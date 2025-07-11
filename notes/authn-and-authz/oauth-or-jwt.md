@@ -12,13 +12,13 @@ components that provide oAuth function\
 3\) resource server ( serrver of bms, leetcode which has user info )\
 4\) auth service ( google/fb/github server )
 
-<img src="../.gitbook/assets/file.excalidraw (1) (1) (1) (1).svg" alt="" class="gitbook-drawing">
+<img src="../.gitbook/assets/file.excalidraw (1) (1) (1) (1) (1).svg" alt="" class="gitbook-drawing">
 
 * here gogole is working as Auth server
 * but if you want to replace this part with own server then you can make your own auth server\
   with login via email/password
 
-<img src="../.gitbook/assets/file.excalidraw (2) (1).svg" alt="" class="gitbook-drawing">
+<img src="../.gitbook/assets/file.excalidraw (2) (1) (1) (1).svg" alt="" class="gitbook-drawing">
 
 three type of auth\
 1\) token based\
@@ -48,7 +48,7 @@ the bestway to store this is with <mark style="color:purple;">http only cookie</
 
 jwt- json web token
 
-<img src="../.gitbook/assets/file.excalidraw (3).svg" alt="" class="gitbook-drawing">
+<img src="../.gitbook/assets/file.excalidraw (3) (1) (1).svg" alt="" class="gitbook-drawing">
 
 ### implementation
 
@@ -276,7 +276,7 @@ public class AuthPassengerDetails extends Passenger implements UserDetails {
 
 ### AuthenticationProvider
 
-<img src="../.gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
+<img src="../.gitbook/assets/file.excalidraw (2) (1) (1).svg" alt="" class="gitbook-drawing">
 
 ```java
 // SpringSecurity.java class

@@ -24,3 +24,5 @@
 * [Common Library](common-library.md)
 * [Indexing in DB](indexing-in-db.md)
 * [Geospatial Data](geospatial-data.md)
+* [webSocket](websocket.md)
+* [HLD - uber](hld-uber-1.md)
