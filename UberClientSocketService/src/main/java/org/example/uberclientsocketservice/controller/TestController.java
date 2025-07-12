@@ -1,6 +1,8 @@
 package org.example.uberclientsocketservice.controller;
 
 import lombok.*;
+import org.example.uberclientsocketservice.dtos.ChatRequest;
+import org.example.uberclientsocketservice.dtos.ChatResponse;
 import org.example.uberclientsocketservice.dtos.TestRequestDto;
 import org.example.uberclientsocketservice.dtos.TestResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +26,21 @@ public class TestController {
     }
 
     // emit direct to the client
-    @Scheduled(fixedDelay = 2000)    // executing this function every 2s
-    public void sendPeriodicMessage() {
-        String msg = "Fixed delay task - " + System.currentTimeMillis();
-        System.out.println(msg);
-        messagingTemplate.convertAndSend("/topic/scheduled", msg);
+//    @Scheduled(fixedDelay = 2000)    // executing this function every 2s
+//    public void sendPeriodicMessage() {
+//        String msg = "Fixed delay task - " + System.currentTimeMillis();
+//        System.out.println(msg);
+//        messagingTemplate.convertAndSend("/topic/scheduled", msg);
+//    }
+
+    @MessageMapping("/chat")
+    @SendTo("/topic/message")
+    public ChatResponse chatMessage(ChatRequest request){
+        ChatResponse response = ChatResponse.builder()
+                .name(request.getName())
+                .message(request.getMessage())
+                .timeStamp(""+System.currentTimeMillis())
+                .build();
+        return response;
     }
 }

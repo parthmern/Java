@@ -12,6 +12,7 @@
 <button onclick="sendMessage()">Send Ping</button>
 <div id="response"></div>
 <div id="response-scheduled"></div>
+<div id="response-msg"></div>
 
 <script>
     let stompClient = null;
@@ -31,15 +32,23 @@
                 console.log("/topic/scheduled hitted from serer ==> ", msg);
                 document.getElementById('response-scheduled').innerHTML += `<p>${msg.body}</p>`;
             })
+
+            stompClient.subscribe("/topic/message", function (msg){
+                console.log("/topic/message hitted from serer ==> ", msg);
+                document.getElementById('response-msg').innerHTML += `<p>${msg.body}</p>`;
+            })
+
         });
     }
 
     function sendMessage() {
         const request = {
-            data: "Hello from client"
+            // data: "Hello from client"
+            name : "parth",
+            message : "msg"
         };
         // send to server
-        stompClient.send("/app/ping", {}, JSON.stringify(request));
+        stompClient.send("/app/chat", {}, JSON.stringify(request));
     }
 </script>
 </body>
