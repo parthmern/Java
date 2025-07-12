@@ -29,4 +29,10 @@ public abstract class BaseModel {
     @LastModifiedDate   // only handle it for object update
     protected Date updatedAt;
 
+    @PrePersist
+    public void prePersist() {
+        System.out.println("PRE-PERSIST CALLED");
+        System.out.println("createdAt from BASEMODEL: " + createdAt);
+    }
+
 }

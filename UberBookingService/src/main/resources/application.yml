@@ -1,0 +1,18 @@
+# i know i am pushing it but this may be deactivated after i will complete the project
+spring:
+  application:
+    name: UberBookingService
+
+  datasource:
+    url: jdbc:mysql://mysql-13f24328-pptl8685-9946.b.aivencloud.com:16510/defaultdb
+    username: avnadmin
+    password: AVNS_I_rzbISG46QB8AW4RZI
+    # password: ${ENV_MYSQL_PASSWORD}  # Access environment variable like this
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+
+server:
+  port: 8000
