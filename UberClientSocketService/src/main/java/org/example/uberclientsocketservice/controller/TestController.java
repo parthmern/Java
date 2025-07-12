@@ -45,6 +45,18 @@ public class TestController {
         return response;
     }
 
+    @MessageMapping("/privateChat/{room}/{userId}")
+//    @SendTo("/topic/privateMessage/{room}/{userId}")
+    public void privateChatMessage(@DestinationVariable String room, @DestinationVariable String userId, ChatRequest request){
+        ChatResponse response = ChatResponse.builder()
+                .name(request.getName())
+                .message(request.getMessage())
+                .timeStamp(""+System.currentTimeMillis())
+                .build();
+        messagingTemplate.convertAndSendToUser(userId, "/queue/privateMessage/" + room, response);
+
+    }
+
 
 
 }
