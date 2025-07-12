@@ -52,7 +52,7 @@ spring.jpa.hibernate.ddl-auto=validate
     <figure><img src="../.gitbook/assets/image (15).png" alt=""><figcaption></figcaption></figure>
 *
 
-    <figure><img src="../.gitbook/assets/image (2) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src="../.gitbook/assets/image (2) (1) (1) (1) (1).png" alt=""><figcaption></figcaption></figure>
 * save it and you got the whole sql file
 * i had no tables in DB rn
 * added some code

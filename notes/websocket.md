@@ -6,8 +6,8 @@
 
 ### Interservice communication&#xD; / microservice communication
 
-<img src=".gitbook/assets/file.excalidraw (1) (1).svg" alt="" class="gitbook-drawing">
+<img src=".gitbook/assets/file.excalidraw (1) (1) (1).svg" alt="" class="gitbook-drawing">
 
 ### why we need async here?
 
-<img src=".gitbook/assets/file.excalidraw (2) (1).svg" alt="" class="gitbook-drawing">
+<img src=".gitbook/assets/file.excalidraw (2) (1) (1).svg" alt="" class="gitbook-drawing">

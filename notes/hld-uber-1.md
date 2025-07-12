@@ -6,7 +6,7 @@
 
 * how to uniquely identify a location —  ( latitude , longitude )
 
-<img src=".gitbook/assets/file.excalidraw.svg" alt="" class="gitbook-drawing">
+<img src=".gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
 
 Restaurant Table
 
@@ -36,7 +36,7 @@ $$
 
 * GeoHashing ( searching problem ) —&#x20;
 
-<img src=".gitbook/assets/file.excalidraw (1).svg" alt="" class="gitbook-drawing">
+<img src=".gitbook/assets/file.excalidraw (1) (1).svg" alt="" class="gitbook-drawing">
 
 * for Geohash of restaurant we can identidy that box and get all drivers within that box
 * but with in that box we cannot identify KM
@@ -44,7 +44,7 @@ $$
 * so now you  can use eculidan equation to identify drivers which has distance is less than 5KM
 * liek below
 
-<img src=".gitbook/assets/file.excalidraw (2).svg" alt="" class="gitbook-drawing">
+<img src=".gitbook/assets/file.excalidraw (2) (1).svg" alt="" class="gitbook-drawing">
 
 Problem — what if restaurant is not present in the middle the box? then what
 

@@ -17,7 +17,7 @@ that was creating issues/conflicts for us
 * also configure all applicaiton.yml&#x20;
 *
 
-    <figure><img src=".gitbook/assets/image (2).png" alt=""><figcaption></figcaption></figure>
+    <figure><img src=".gitbook/assets/image (2) (1).png" alt=""><figcaption></figcaption></figure>
 * it is shutting down automatiically brecause we donot have spring web but it is working
 
 \
