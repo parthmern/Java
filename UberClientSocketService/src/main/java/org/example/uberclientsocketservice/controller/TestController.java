@@ -6,6 +6,7 @@ import org.example.uberclientsocketservice.dtos.ChatResponse;
 import org.example.uberclientsocketservice.dtos.TestRequestDto;
 import org.example.uberclientsocketservice.dtos.TestResponseDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
@@ -33,9 +34,9 @@ public class TestController {
 //        messagingTemplate.convertAndSend("/topic/scheduled", msg);
 //    }
 
-    @MessageMapping("/chat")
-    @SendTo("/topic/message")
-    public ChatResponse chatMessage(ChatRequest request){
+    @MessageMapping("/chat/{room}")
+    @SendTo("/topic/message/{room}")
+    public ChatResponse chatMessage(@DestinationVariable String room, ChatRequest request){
         ChatResponse response = ChatResponse.builder()
                 .name(request.getName())
                 .message(request.getMessage())
@@ -43,4 +44,7 @@ public class TestController {
                 .build();
         return response;
     }
+
+
+
 }

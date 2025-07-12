@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Room</title>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+</head>
+<body>
+<h2 id="room-title">Room:</h2>
+
+<input type="text" id="name" placeholder="Your Name" />
+<input type="text" id="message" placeholder="Message" />
+<button onclick="sendMessage()">Send</button>
+
+<div id="chat-box"></div>
+
+<script>
+    // Get roomId from query param
+    const params = new URLSearchParams(window.location.search);
+    const roomId = params.get("roomId");
+
+    // Show room ID
+    document.getElementById("room-title").innerText = "Room: " + roomId;
+
+    let stompClient = null;
+
+    function connect() {
+        const socket = new SockJS('http://localhost:8080/ws'); // Adjust if using another port
+        stompClient = Stomp.over(socket);
+
+        stompClient.connect({}, () => {
+            // Subscribe to room topic
+            stompClient.subscribe(`/topic/message/${roomId}`, (msg) => {
+                const body = JSON.parse(msg.body);
+                const chatBox = document.getElementById("chat-box");
+                const messageEl = document.createElement("p");
+                messageEl.textContent = `${body.name}: ${body.message}`;
+                chatBox.appendChild(messageEl);
+            });
+        });
+    }
+
+    function sendMessage() {
+        const name = document.getElementById("name").value;
+        const message = document.getElementById("message").value;
+
+        if (name && message && stompClient) {
+            stompClient.send(`/app/chat/${roomId}`, {}, JSON.stringify({
+                name,
+                message
+            }));
+            document.getElementById("message").value = '';
+        }
+    }
+
+    // Connect on load
+    if (roomId) {
+        connect();
+    } else {
+        alert("No roomId in URL");
+    }
+</script>
+</body>
+</html>
