@@ -46,12 +46,14 @@ public class BookingServiceImpl implements BookingService{
 
         NearbyDriversRequestDto reqBody = NearbyDriversRequestDto.builder()
                 .latitude(bookingDetails.getStartLocation().getLatitude())
-                .longitude(bookingDetails.getEndLocation().getLatitude())
+                .longitude(bookingDetails.getStartLocation().getLongitude())
                 .build();
 
         //make api call to get nearby
         // here ResponseEntity<List<DriverLocationDto>> here java world it is List but when you return JSON from somewhere it is ARRAY[] only
         ResponseEntity<DriverLocationDto[]> nearbyDrivers = restTemplate.postForEntity(LOCATION_SERVICE_URL+"/api/location/nearby/drivers", reqBody , DriverLocationDto[].class);
+
+        System.out.println("nearbyDrivers.getBody(): " + Arrays.toString(nearbyDrivers.getBody()));
 
         if(nearbyDrivers.getStatusCode().is2xxSuccessful() & nearbyDrivers.getBody() != null ) {
             List<DriverLocationDto> driverLocations = Arrays.asList(nearbyDrivers.getBody());
@@ -59,14 +61,14 @@ public class BookingServiceImpl implements BookingService{
             driverLocations.forEach(driverLocationDto -> {
                 System.out.println(driverLocationDto.getDriverId() + " " + driverLocationDto.getLatitude() + " " + driverLocationDto.getLongitude());
             });
+        }else {
+            System.out.println("nearbydrivers is null");
         }
-
-
 
         CreateBookingResponseDto res = CreateBookingResponseDto.builder()
                 .bookingId(newBooking.getId())
                 .bookingStatus(newBooking.getBookingStatus().name())
-                .driver(Optional.of(newBooking.getDriver()))
+//                .driver(Optional.of(newBooking.getDriver()))
                 .build();
         return res;
     }
