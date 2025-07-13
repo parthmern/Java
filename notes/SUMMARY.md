@@ -27,3 +27,5 @@
 * [webSocket](websocket.md)
 * [HLD - uber](hld-uber-1.md)
 * [SOCKJS | STOMP](sockjs-or-stomp.md)
+* [RestTemplate](resttemplate.md)
+* [cron jobs @scheduled](cron-jobs-scheduled.md)
