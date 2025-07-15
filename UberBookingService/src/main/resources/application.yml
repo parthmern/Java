@@ -2,6 +2,9 @@
 spring:
   application:
     name: UberBookingService
+  cloud:
+    compatibility-verifier:
+      enabled: false
 
   datasource:
     url: jdbc:mysql://mysql-13f24328-pptl8685-9946.b.aivencloud.com:16510/defaultdb
@@ -16,3 +19,10 @@ spring:
 
 server:
   port: 8000
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/ # URL of the Eureka Server
+  instance:
+    prefer-ip-address: true

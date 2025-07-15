@@ -1,5 +1,6 @@
 package org.example.uberbookingservice.services;
 
+import org.example.uberbookingservice.apis.LocationServiceApi;
 import org.example.uberbookingservice.dtos.CreateBookingDto;
 import org.example.uberbookingservice.dtos.CreateBookingResponseDto;
 import org.example.uberbookingservice.dtos.DriverLocationDto;
@@ -12,6 +13,9 @@ import org.example.uberentityservice.models.Passenger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import java.util.Arrays;
 import java.util.List;
@@ -24,13 +28,15 @@ public class BookingServiceImpl implements BookingService{
     private final PassengerRepository passengerRepository;
     private final BookingRepository bookingRepository;
     private final RestTemplate restTemplate;
+    private final LocationServiceApi locationServiceApi;
 
     private static final String LOCATION_SERVICE_URL =  "http://localhost:6000/";
 
-    public BookingServiceImpl(PassengerRepository passengerRepository, BookingRepository bookingRepository) {
+    public BookingServiceImpl(PassengerRepository passengerRepository, BookingRepository bookingRepository, LocationServiceApi locationServiceApi) {
         this.passengerRepository = passengerRepository;
         this.bookingRepository = bookingRepository;
         this.restTemplate = new RestTemplate();
+        this.locationServiceApi = locationServiceApi;
     }
 
     @Override
@@ -49,21 +55,14 @@ public class BookingServiceImpl implements BookingService{
                 .longitude(bookingDetails.getStartLocation().getLongitude())
                 .build();
 
-        //make api call to get nearby
-        // here ResponseEntity<List<DriverLocationDto>> here java world it is List but when you return JSON from somewhere it is ARRAY[] only
-        ResponseEntity<DriverLocationDto[]> nearbyDrivers = restTemplate.postForEntity(LOCATION_SERVICE_URL+"/api/location/nearby/drivers", reqBody , DriverLocationDto[].class);
+//        //make api call to get nearby
+//        // here ResponseEntity<List<DriverLocationDto>> here java world it is List but when you return JSON from somewhere it is ARRAY[] only
+//        ResponseEntity<DriverLocationDto[]> nearbyDrivers = restTemplate.postForEntity(LOCATION_SERVICE_URL+"/api/location/nearby/drivers", reqBody , DriverLocationDto[].class);
+//        System.out.println("nearbyDrivers.getBody(): " + Arrays.toString(nearbyDrivers.getBody()));
 
-        System.out.println("nearbyDrivers.getBody(): " + Arrays.toString(nearbyDrivers.getBody()));
+        processNearbyDriversAsync(reqBody);
 
-        if(nearbyDrivers.getStatusCode().is2xxSuccessful() & nearbyDrivers.getBody() != null ) {
-            List<DriverLocationDto> driverLocations = Arrays.asList(nearbyDrivers.getBody());
 
-            driverLocations.forEach(driverLocationDto -> {
-                System.out.println(driverLocationDto.getDriverId() + " " + driverLocationDto.getLatitude() + " " + driverLocationDto.getLongitude());
-            });
-        }else {
-            System.out.println("nearbydrivers is null");
-        }
 
         CreateBookingResponseDto res = CreateBookingResponseDto.builder()
                 .bookingId(newBooking.getId())
@@ -72,4 +71,31 @@ public class BookingServiceImpl implements BookingService{
                 .build();
         return res;
     }
+
+    private void processNearbyDriversAsync(NearbyDriversRequestDto requestDto) {
+        Call<DriverLocationDto[]> call = locationServiceApi.getNearbyDrivers(requestDto);
+
+        // working in different thread - asnchronus nature
+        // async
+        call.enqueue(new Callback<DriverLocationDto[]>() {
+            @Override
+            public void onResponse(Call<DriverLocationDto[]> call, Response<DriverLocationDto[]> response) {
+                if(response.isSuccessful() & response.body() != null ) {
+                    List<DriverLocationDto> driverLocations = Arrays.asList(response.body());
+
+                    driverLocations.forEach(driverLocationDto -> {
+                        System.out.println(driverLocationDto.getDriverId() + " " + driverLocationDto.getLatitude() + " " + driverLocationDto.getLongitude());
+                    });
+                }else {
+                    System.out.println("Req failed No response"+ response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<DriverLocationDto[]> call, Throwable throwable) {
+
+            }
+        });
+    }
+
 }
