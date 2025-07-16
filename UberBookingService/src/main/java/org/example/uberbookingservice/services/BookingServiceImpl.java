@@ -1,14 +1,13 @@
 package org.example.uberbookingservice.services;
 
 import org.example.uberbookingservice.apis.LocationServiceApi;
-import org.example.uberbookingservice.dtos.CreateBookingDto;
-import org.example.uberbookingservice.dtos.CreateBookingResponseDto;
-import org.example.uberbookingservice.dtos.DriverLocationDto;
-import org.example.uberbookingservice.dtos.NearbyDriversRequestDto;
+import org.example.uberbookingservice.dtos.*;
 import org.example.uberbookingservice.repositories.BookingRepository;
+import org.example.uberbookingservice.repositories.DriverRepository;
 import org.example.uberbookingservice.repositories.PassengerRepository;
 import org.example.uberentityservice.models.Booking;
 import org.example.uberentityservice.models.BookingStatus;
+import org.example.uberentityservice.models.Driver;
 import org.example.uberentityservice.models.Passenger;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -31,12 +30,14 @@ public class BookingServiceImpl implements BookingService{
     private final LocationServiceApi locationServiceApi;
 
     private static final String LOCATION_SERVICE_URL =  "http://localhost:6000/";
+    private final DriverRepository driverRepository;
 
-    public BookingServiceImpl(PassengerRepository passengerRepository, BookingRepository bookingRepository, LocationServiceApi locationServiceApi) {
+    public BookingServiceImpl(PassengerRepository passengerRepository, BookingRepository bookingRepository, LocationServiceApi locationServiceApi, DriverRepository driverRepository) {
         this.passengerRepository = passengerRepository;
         this.bookingRepository = bookingRepository;
         this.restTemplate = new RestTemplate();
         this.locationServiceApi = locationServiceApi;
+        this.driverRepository = driverRepository;
     }
 
     @Override
@@ -96,6 +97,19 @@ public class BookingServiceImpl implements BookingService{
 
             }
         });
+    }
+
+    @Override
+    public UpdateBookingResponseDto updateBooking(UpdateBookingRequestDto updateBookingRequestDto, Long bookingId) {
+        Optional<Driver> driver = driverRepository.findById(updateBookingRequestDto.getDriverId().get());
+        bookingRepository.updateBookingStatusAndDriverById(bookingId, BookingStatus.SCHEDULED, driver.get());
+        Optional<Booking> booking = bookingRepository.findById(bookingId);
+        return UpdateBookingResponseDto.builder()
+                .bookingId(booking.get().getId())
+                .status(booking.get().getBookingStatus())
+                .driver(Optional.ofNullable(booking.get().getDriver()))
+                .build();
+
     }
 
 }

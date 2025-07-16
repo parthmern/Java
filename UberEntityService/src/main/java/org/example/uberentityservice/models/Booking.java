@@ -1,5 +1,6 @@
 package org.example.uberentityservice.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,6 +31,7 @@ public class Booking extends BaseModel {
 
     // n : 1 -> booking : driver ( a booking has one driver )
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     private Driver driver;
 
     @ManyToOne(fetch = FetchType.LAZY)

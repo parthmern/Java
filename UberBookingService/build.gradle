@@ -38,7 +38,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
     // maven local common lib
-    implementation "org.example:UberEntityService:0.0.7-SNAPSHOT"
+    implementation "org.example:UberEntityService:0.0.8-SNAPSHOT"
 
     implementation('com.squareup.retrofit2:retrofit:2.4.0')
     implementation('com.squareup.retrofit2:converter-gson:2.4.0')

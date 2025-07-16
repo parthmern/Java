@@ -1,5 +1,6 @@
 package org.example.uberentityservice.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMax;
 import jakarta.validation.constraints.DecimalMin;
@@ -31,6 +32,7 @@ public class Driver extends BaseModel {
     // 1 : n -> driver : booking   (a driver has many booking)
     @OneToMany(mappedBy = "driver", fetch = FetchType.LAZY)
     @Fetch(value = FetchMode.SUBSELECT)
+    @JsonIgnore
     private List<Booking> bookings = new ArrayList<>();
 
     @Enumerated(value = EnumType.STRING)
