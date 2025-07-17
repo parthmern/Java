@@ -139,7 +139,7 @@ public class BookingServiceImpl implements BookingService{
 
             @Override
             public void onFailure(Call<Boolean> call, Throwable throwable) {
-
+                throwable.printStackTrace();
             }
         });
     }
