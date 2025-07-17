@@ -29,3 +29,4 @@
 * [SOCKJS | STOMP](sockjs-or-stomp.md)
 * [RestTemplate](resttemplate.md)
 * [cron jobs @scheduled](cron-jobs-scheduled.md)
+* [Retrofit - integrating diff microservices](retrofit-integrating-diff-microservices.md)

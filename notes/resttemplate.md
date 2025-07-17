@@ -12,3 +12,8 @@ ResponseEntity<DriverLocationDto[]> nearbyDrivers = restTemplate.postForEntity(L
 System.out.println("nearbyDrivers.getBody(): " + Arrays.toString(nearbyDrivers.getBody()));
 ```
 
+
+
+or you can also use <mark style="background-color:red;">**retrofit**</mark>
+
+{% embed url="https://oguzhanderici.medium.com/spring-boot-microservices-communication-with-retrofit-4cd4445b001a" %}
