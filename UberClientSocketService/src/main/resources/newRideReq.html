@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>STOMP Client Test</title>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+</head>
+<body>
+<h2>STOMP Client Listening to /topic/rideRequest</h2>
+<div id="messages"></div>
+
+<script>
+    // Change this to match your WebSocket endpoint
+    const socket = new SockJS('http://localhost:8080/ws'); // Spring Boot default endpoint
+    const stompClient = Stomp.over(socket);
+
+    stompClient.connect({}, function (frame) {
+        console.log('Connected: ' + frame);
+
+        // Subscribe to topic where ride requests are sent
+        stompClient.subscribe('/topic/rideRequest', function (message) {
+            const rideRequest = JSON.parse(message.body);
+            console.log('Received:', rideRequest);
+
+            // Show in browser
+            const msgDiv = document.getElementById('messages');
+            msgDiv.innerHTML += `<p>New Ride Request: ${JSON.stringify(rideRequest)}</p>`;
+
+            // alert box
+            const res = confirm(`you have new ride from passenger : ${rideRequest?.passengerId}? `)
+            console.log("i select ride ? " , res);
+            const DRIVERID = 1;
+            stompClient.send("/app/rideResponse", {}, JSON.stringify({response: res, driverId : DRIVERID}))
+        });
+    });
+</script>
+</body>
+</html>
