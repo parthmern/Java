@@ -28,11 +28,11 @@
             msgDiv.innerHTML += `<p>New Ride Request: ${JSON.stringify(rideRequest)}</p>`;
 
             // alert box
-            const res = confirm(`you have new ride from passenger : ${rideRequest?.passengerId}? `)
+            const res = confirm(`you have new ride from passenger : ${rideRequest?.passengerId} which has bookingID ${rideRequest?.bookingId}? `)
             console.log("i select ride ? " , res);
             if(res == true){
                 const id = prompt("enter your driverId ( realife = got it from cookies)");
-                stompClient.send(`/app/rideResponse/${id}`, {}, JSON.stringify({response: res}))
+                stompClient.send(`/app/rideResponse/${id}`, {}, JSON.stringify({response: res, bookingId: rideRequest?.bookingId}))
             }else {
                 console.log("you selected NO so not doing anything like server evenets")
             }

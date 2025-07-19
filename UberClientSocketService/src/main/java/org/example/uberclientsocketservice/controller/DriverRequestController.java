@@ -3,23 +3,20 @@ package org.example.uberclientsocketservice.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.uberclientsocketservice.dtos.RideRequestDto;
 import org.example.uberclientsocketservice.dtos.RideResponseDto;
-import org.example.uberclientsocketservice.dtos.TestRequestDto;
-import org.example.uberclientsocketservice.dtos.TestResponseDto;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.uberclientsocketservice.dtos.UpdateBookingRequestDto;
+import org.example.uberclientsocketservice.dtos.UpdateBookingResponseDto;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/api/socket")
@@ -28,10 +25,12 @@ public class DriverRequestController {
 
     private ObjectMapper objectMapper;
     private SimpMessagingTemplate messagingTemplate;
+    private RestTemplate restTemplate;
 
     public DriverRequestController(SimpMessagingTemplate messagingTemplate, ObjectMapper objectMapper) {
         this.messagingTemplate = messagingTemplate;
         this.objectMapper = objectMapper;
+        this.restTemplate = new RestTemplate();
     }
 
 //    @Scheduled  (fixedDelay = 2000)    // executing this function every 2s
@@ -59,12 +58,20 @@ public class DriverRequestController {
         messagingTemplate.convertAndSend("/topic/rideRequest", requestDto);
     }
 
+    // synchronized means -> sync function ( concurrent DS handle )
+    // + handle concurrency on DB side ( watch atomicity , isolation level on DB )
+
     @MessageMapping("/rideResponse/{userId}")
-    public void rideRequestHandler(@DestinationVariable String userId, RideResponseDto rideResponseDto){
-        System.out.println(rideResponseDto.response +  " <- by driverId : " + userId);
+    public synchronized void rideRequestHandler(@DestinationVariable String userId, RideResponseDto rideResponseDto){
+        System.out.println(rideResponseDto.response +  " <- by driverId : " + userId + " and booking id:" + rideResponseDto.bookingId);
+
+        UpdateBookingRequestDto updateBookingRequestDto = UpdateBookingRequestDto.builder()
+                .driverId(Optional.of(Long.parseLong(userId)))
+                .bookingStatus("SCHEDULED")
+                .build();
+        ResponseEntity<UpdateBookingResponseDto> result = this.restTemplate.postForEntity("http://localhost:8000/api/v1/booking/"+ rideResponseDto.bookingId, updateBookingRequestDto, UpdateBookingResponseDto.class);
+        System.out.println(result.getStatusCode()+ " "+ result.getBody() );
     }
-
-
 
 
 }

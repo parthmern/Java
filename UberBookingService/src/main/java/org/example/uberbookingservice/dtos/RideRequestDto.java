@@ -15,4 +15,5 @@ public class RideRequestDto {
     private org.example.uberentityservice.models.ExactLocation startLocation;
     private ExactLocation endLocation;
     private List<Long> nearByDriverIds;
+    private Long bookingId;
 }

@@ -102,7 +102,7 @@ public class BookingServiceImpl implements BookingService{
                             .collect(Collectors.toList());
 
 
-                    raiseRideRequestAsync(RideRequestDto.builder().passengerId(passengerId).startLocation(newlyCreatedBooking.getStartLocation()).endLocation(newlyCreatedBooking.getEndLocation()).nearByDriverIds(nearbyDriverIds).build());
+                    raiseRideRequestAsync(RideRequestDto.builder().bookingId(newlyCreatedBooking.getId()).passengerId(passengerId).startLocation(newlyCreatedBooking.getStartLocation()).endLocation(newlyCreatedBooking.getEndLocation()).nearByDriverIds(nearbyDriverIds).build());
 
                 }else {
                     System.out.println("Req failed No response"+ response.message());
@@ -119,7 +119,9 @@ public class BookingServiceImpl implements BookingService{
     @Override
     public UpdateBookingResponseDto updateBooking(UpdateBookingRequestDto updateBookingRequestDto, Long bookingId) {
         Optional<Driver> driver = driverRepository.findById(updateBookingRequestDto.getDriverId().get());
+        // TODO: check drivver is in DB and isnot associate to any ride present
         bookingRepository.updateBookingStatusAndDriverById(bookingId, BookingStatus.SCHEDULED, driver.get());
+        // TODO: like make driver unavailable
         Optional<Booking> booking = bookingRepository.findById(bookingId);
         return UpdateBookingResponseDto.builder()
                 .bookingId(booking.get().getId())
@@ -131,7 +133,7 @@ public class BookingServiceImpl implements BookingService{
 
     private void raiseRideRequestAsync(RideRequestDto requestDto) {
         System.out.println("Calling raiseRideRequestAsync -- calling to uberSocketApi");
-        Call<Boolean> call = uberSocketApi.getNearbyDrivers(requestDto);
+        Call<Boolean> call = uberSocketApi.raiseRideRequest(requestDto);
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {

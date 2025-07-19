@@ -1,7 +1,6 @@
-package org.example.uberbookingservice.dtos;
+package org.example.uberclientsocketservice.dtos;
 
 import lombok.*;
-import org.example.uberentityservice.models.BookingStatus;
 
 import java.util.Optional;
 
