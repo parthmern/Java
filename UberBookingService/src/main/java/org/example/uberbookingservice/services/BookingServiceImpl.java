@@ -20,6 +20,7 @@ import retrofit2.Response;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class BookingServiceImpl implements BookingService{
@@ -55,7 +56,7 @@ public class BookingServiceImpl implements BookingService{
                 .build();
         Booking newBooking = bookingRepository.save(booking);
 
-        System.out.println("booking created");
+        System.out.println("booking created"+ " start X " + newBooking.getStartLocation().getLatitude() + " end X " + newBooking.getEndLocation().getLatitude());
 
         NearbyDriversRequestDto reqBody = NearbyDriversRequestDto.builder()
                 .latitude(bookingDetails.getStartLocation().getLatitude())
@@ -68,7 +69,7 @@ public class BookingServiceImpl implements BookingService{
 //        System.out.println("nearbyDrivers.getBody(): " + Arrays.toString(nearbyDrivers.getBody()));
 
 
-        processNearbyDriversAsync(reqBody, bookingDetails.getPassengerId());
+        processNearbyDriversAsync(reqBody, bookingDetails.getPassengerId(), newBooking);
 
         CreateBookingResponseDto res = CreateBookingResponseDto.builder()
                 .bookingId(newBooking.getId())
@@ -78,8 +79,8 @@ public class BookingServiceImpl implements BookingService{
         return res;
     }
 
-    private void processNearbyDriversAsync(NearbyDriversRequestDto requestDto, Long passengerId) {
-        System.out.println("Calling processNearbyDriversAsync");
+    private void processNearbyDriversAsync(NearbyDriversRequestDto requestDto, Long passengerId, Booking newlyCreatedBooking) {
+        System.out.println("Calling processNearbyDriversAsync - calling to locationServiceApi");
 
         Call<DriverLocationDto[]> call = locationServiceApi.getNearbyDrivers(requestDto);
 
@@ -96,7 +97,12 @@ public class BookingServiceImpl implements BookingService{
                     });
                     System.out.println("successful processNearbyDriversAsync");
 
-                    raiseRideRequestAsync(RideRequestDto.builder().passengerId(passengerId).build());
+                    List<Long> nearbyDriverIds = driverLocations.stream()
+                            .map(driver -> Long.parseLong(driver.getDriverId()))
+                            .collect(Collectors.toList());
+
+
+                    raiseRideRequestAsync(RideRequestDto.builder().passengerId(passengerId).startLocation(newlyCreatedBooking.getStartLocation()).endLocation(newlyCreatedBooking.getEndLocation()).nearByDriverIds(nearbyDriverIds).build());
 
                 }else {
                     System.out.println("Req failed No response"+ response.message());
@@ -124,7 +130,7 @@ public class BookingServiceImpl implements BookingService{
     }
 
     private void raiseRideRequestAsync(RideRequestDto requestDto) {
-        System.out.println("Calling raiseRideRequestAsync");
+        System.out.println("Calling raiseRideRequestAsync -- calling to uberSocketApi");
         Call<Boolean> call = uberSocketApi.getNearbyDrivers(requestDto);
         call.enqueue(new Callback<Boolean>() {
             @Override

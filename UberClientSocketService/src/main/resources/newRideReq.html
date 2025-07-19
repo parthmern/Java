@@ -30,8 +30,12 @@
             // alert box
             const res = confirm(`you have new ride from passenger : ${rideRequest?.passengerId}? `)
             console.log("i select ride ? " , res);
-            const DRIVERID = 1;
-            stompClient.send("/app/rideResponse", {}, JSON.stringify({response: res, driverId : DRIVERID}))
+            if(res == true){
+                const id = prompt("enter your driverId ( realife = got it from cookies)");
+                stompClient.send(`/app/rideResponse/${id}`, {}, JSON.stringify({response: res}))
+            }else {
+                console.log("you selected NO so not doing anything like server evenets")
+            }
         });
     });
 </script>
