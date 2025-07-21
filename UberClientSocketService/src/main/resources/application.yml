@@ -4,6 +4,15 @@ spring:
   cloud:
     compatibility-verifier:
       enabled: false
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: "sample-group"
 
   datasource:
     url: jdbc:mysql://mysql-13f24328-pptl8685-9946.b.aivencloud.com:16510/defaultdb

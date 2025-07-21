@@ -32,6 +32,9 @@ dependencies {
     // maven local common lib
     implementation "org.example:UberEntityService:0.0.8-SNAPSHOT"
 
+    implementation 'org.springframework.kafka:spring-kafka'
+
+
 }
 
 tasks.named('test') {
