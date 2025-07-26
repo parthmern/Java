@@ -3,6 +3,7 @@ package org.example.uberbookingservice.services;
 import org.example.uberbookingservice.apis.LocationServiceApi;
 import org.example.uberbookingservice.apis.UberSocketApi;
 import org.example.uberbookingservice.dtos.*;
+import org.example.uberbookingservice.producers.KafkaProducerService;
 import org.example.uberbookingservice.repositories.BookingRepository;
 import org.example.uberbookingservice.repositories.DriverRepository;
 import org.example.uberbookingservice.repositories.PassengerRepository;
@@ -11,6 +12,8 @@ import org.example.uberentityservice.models.BookingStatus;
 import org.example.uberentityservice.models.Driver;
 import org.example.uberentityservice.models.Passenger;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import retrofit2.Call;
@@ -20,6 +23,7 @@ import retrofit2.Response;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,17 +35,20 @@ public class BookingServiceImpl implements BookingService{
     private final RestTemplate restTemplate;
     private final LocationServiceApi locationServiceApi;
     private final UberSocketApi uberSocketApi;
+    private final KafkaProducerService kafkaProducerService;
+
 
     private static final String LOCATION_SERVICE_URL =  "http://localhost:6000/";
     private final DriverRepository driverRepository;
 
-    public BookingServiceImpl(PassengerRepository passengerRepository, BookingRepository bookingRepository, LocationServiceApi locationServiceApi, DriverRepository driverRepository, UberSocketApi uberSocketApi) {
+    public BookingServiceImpl(PassengerRepository passengerRepository, BookingRepository bookingRepository, LocationServiceApi locationServiceApi, DriverRepository driverRepository, UberSocketApi uberSocketApi, KafkaProducerService kafkaProducerService) {
         this.passengerRepository = passengerRepository;
         this.bookingRepository = bookingRepository;
         this.restTemplate = new RestTemplate();
         this.locationServiceApi = locationServiceApi;
         this.driverRepository = driverRepository;
         this.uberSocketApi = uberSocketApi;
+        this.kafkaProducerService = kafkaProducerService;
     }
 
     @Override
@@ -102,7 +109,19 @@ public class BookingServiceImpl implements BookingService{
                             .collect(Collectors.toList());
 
 
-                    raiseRideRequestAsync(RideRequestDto.builder().bookingId(newlyCreatedBooking.getId()).passengerId(passengerId).startLocation(newlyCreatedBooking.getStartLocation()).endLocation(newlyCreatedBooking.getEndLocation()).nearByDriverIds(nearbyDriverIds).build());
+                    // this is HTTP REQ
+                    //raiseRideRequestAsync(RideRequestDto.builder().bookingId(newlyCreatedBooking.getId()).passengerId(passengerId).startLocation(newlyCreatedBooking.getStartLocation()).endLocation(newlyCreatedBooking.getEndLocation()).nearByDriverIds(nearbyDriverIds).build());
+
+                    RideRequestDto dto = RideRequestDto.builder()
+                            .bookingId(newlyCreatedBooking.getId())
+                            .passengerId(passengerId)
+                            .startLocation(newlyCreatedBooking.getStartLocation())
+                            .endLocation(newlyCreatedBooking.getEndLocation())
+                            .nearByDriverIds(nearbyDriverIds)
+                            .build();
+
+                    kafkaProducerService.publishRideRequest("ride-requests", dto);
+
 
                 }else {
                     System.out.println("Req failed No response"+ response.message());
@@ -132,6 +151,7 @@ public class BookingServiceImpl implements BookingService{
     }
 
     private void raiseRideRequestAsync(RideRequestDto requestDto) {
+
         System.out.println("Calling raiseRideRequestAsync -- calling to uberSocketApi");
         Call<Boolean> call = uberSocketApi.raiseRideRequest(requestDto);
         call.enqueue(new Callback<Boolean>() {
@@ -151,6 +171,8 @@ public class BookingServiceImpl implements BookingService{
             }
         });
     }
+
+
 
 
 }

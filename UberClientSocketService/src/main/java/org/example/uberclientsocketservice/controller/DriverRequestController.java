@@ -71,12 +71,16 @@ public class DriverRequestController {
         System.out.println(rideResponseDto.response +  " <- by driverId : " + userId + " and booking id:" + rideResponseDto.bookingId);
 
         UpdateBookingRequestDto updateBookingRequestDto = UpdateBookingRequestDto.builder()
-                .driverId(Optional.of(Long.parseLong(userId)))
+                .driverId(Long.parseLong(userId))
                 .bookingStatus("SCHEDULED")
                 .build();
-        ResponseEntity<UpdateBookingResponseDto> result = this.restTemplate.postForEntity("http://localhost:8000/api/v1/booking/"+ rideResponseDto.bookingId, updateBookingRequestDto, UpdateBookingResponseDto.class);
-        System.out.println(result.getStatusCode()+ " "+ result.getBody() );
-        kafkaProducerService.publishMessage("sample-topic", "hello");   // ANOTHER WAY
+
+        // HTTP REQ
+        //ResponseEntity<UpdateBookingResponseDto> result = this.restTemplate.postForEntity("http://localhost:8000/api/v1/booking/"+ rideResponseDto.bookingId, updateBookingRequestDto, UpdateBookingResponseDto.class);
+        //System.out.println(result.getStatusCode()+ " "+ result.getBody() );
+
+        System.out.println("MESSAGE PRODUCEING ..... TO KAFKA");
+        kafkaProducerService.sendBookingUpdate(updateBookingRequestDto, rideResponseDto.bookingId);
     }
 
     @GetMapping
